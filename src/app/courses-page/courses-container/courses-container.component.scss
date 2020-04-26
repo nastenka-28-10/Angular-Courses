@@ -1,0 +1,9 @@
+@import '../../constants/constants.scss';
+
+.courses-container {
+  background-color: $gray2;
+
+  .courses-content {
+    padding: 24px 85px 79px;
+  }
+}
