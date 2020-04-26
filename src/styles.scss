@@ -1,5 +1,12 @@
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button, input {
+  outline: none;
+  border: none;
 }
 
 .root {
@@ -10,4 +17,5 @@
 
 app-courses-container {
   flex-grow: 1;
+  overflow: auto;
 }

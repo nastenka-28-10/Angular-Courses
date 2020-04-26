@@ -1,0 +1,9 @@
+@import '../../constants/constants.scss';
+
+.course-item {
+  height: 163px;
+  margin: 12px 0 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+  background-color: $white1;
+}

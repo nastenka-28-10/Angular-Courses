@@ -1,0 +1,17 @@
+@import '../../constants/constants.scss';
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+
+  &__add-courses {
+    width: 138px;
+    height: 36px;
+    margin-top: 24px;
+    align-self: flex-end;
+    background-color: $blue1;
+    border-radius: 3px;
+    color: $white1;
+    cursor: pointer;
+  }
+}
