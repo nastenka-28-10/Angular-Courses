@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CoreModule} from './core/core.module';
-import {CoursesPageModule} from './courses-page/courses-page.module';
+import {CoreModule} from './modules/core/core.module';
+import {CoursesPageModule} from './modules/courses-page/courses-page.module';
 
 @NgModule({
   declarations: [

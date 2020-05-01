@@ -1,6 +1,6 @@
-import {IUser} from './user.model';
+import {User} from 'app/interfaces/user';
 
-export class User implements IUser{
+export class User implements User{
   public id: number;
   public firstName: string;
   public lastName: string;

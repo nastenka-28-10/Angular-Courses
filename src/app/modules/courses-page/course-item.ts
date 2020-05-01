@@ -1,6 +1,6 @@
-import {ICourseItem} from './course-item.model';
+import {CourseItem} from 'app/interfaces/course-item';
 
-export class CourseItem implements ICourseItem {
+export class CourseItem implements CourseItem {
   public creationDate: string;
   public description: string;
   public durationMinutes: number;
