@@ -1,11 +1,11 @@
 import {CourseItem} from 'app/interfaces/course-item';
 
 export class CourseItem implements CourseItem {
-  public creationDate: string;
-  public description: string;
-  public durationMinutes: number;
-  public id: number;
-  public title: string;
+  creationDate: string;
+  description: string;
+  durationMinutes: number;
+  id: number;
+  title: string;
 
   constructor(
     creationDate: string,
