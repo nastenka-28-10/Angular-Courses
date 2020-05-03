@@ -24,6 +24,14 @@
     width: 179px;
     height: 24px;
     margin-left: 6px;
+
+    &::placeholder {
+      font-family: 'Source Sans Pro';
+      font-size: 14px;
+      line-height: 1.71;
+      letter-spacing: 0.22px;
+      color: $silver;
+    }
   }
 
   &__button {
