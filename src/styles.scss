@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: Oswald;
+  src: url('app/../assets/fonts/Oswald/static/Oswald-Regular.ttf');
+}
+
+@font-face {
+  font-family: Oswald-Medium;
+  src: url('app/../assets/fonts/Oswald/static/Oswald-Medium.ttf');
+}
+
 button,
 input {
   outline: none;
