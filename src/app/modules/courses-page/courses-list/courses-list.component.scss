@@ -1,0 +1,17 @@
+@import 'app/constants/constants';
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+
+  &__add-courses {
+    width: 138px;
+    height: 36px;
+    margin-top: 24px;
+    align-self: flex-end;
+    background-color: $dark-sky-blue;
+    border-radius: 3px;
+    color: $white;
+    cursor: pointer;
+  }
+}
