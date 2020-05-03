@@ -1,6 +1,6 @@
-import {User} from 'app/interfaces/user';
+import { User } from 'app/interfaces/user';
 
-export class User implements User{
+export class User implements User {
   id: number;
   firstName: string;
   lastName: string;

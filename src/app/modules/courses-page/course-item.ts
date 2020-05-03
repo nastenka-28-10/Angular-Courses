@@ -1,4 +1,4 @@
-import {CourseItem} from 'app/interfaces/course-item';
+import { CourseItem } from 'app/interfaces/course-item';
 
 export class CourseItem implements CourseItem {
   creationDate: string;
@@ -12,7 +12,7 @@ export class CourseItem implements CourseItem {
     description: string,
     durationMinutes: number,
     id: number,
-    title: string
+    title: string,
   ) {
     this.creationDate = creationDate;
     this.description = description;

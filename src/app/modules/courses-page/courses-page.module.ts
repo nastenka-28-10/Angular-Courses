@@ -6,15 +6,15 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesContainerComponent } from './courses-container/courses-container.component';
 
-
-
 @NgModule({
-  declarations: [BreadcrumbsComponent, SearchCourseComponent, CoursesListComponent, CourseItemComponent, CoursesContainerComponent],
-  imports: [
-    CommonModule
+  declarations: [
+    BreadcrumbsComponent,
+    SearchCourseComponent,
+    CoursesListComponent,
+    CourseItemComponent,
+    CoursesContainerComponent,
   ],
-  exports: [
-    CoursesContainerComponent
-  ]
+  imports: [CommonModule],
+  exports: [CoursesContainerComponent],
 })
-export class CoursesPageModule { }
+export class CoursesPageModule {}
