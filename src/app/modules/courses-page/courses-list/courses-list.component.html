@@ -3,7 +3,5 @@
     <div class="add-icon"></div>
     <div class="add-course-text">Add course</div>
   </button>
-  <app-course-item></app-course-item>
-  <app-course-item></app-course-item>
-  <app-course-item></app-course-item>
+  <app-course-item *ngFor="let item of coursesList" [courseItem]="item" (deleteCourse)="onDeleteCourse($event)"></app-course-item>
 </div>

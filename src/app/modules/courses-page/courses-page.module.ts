@@ -5,7 +5,7 @@ import { SearchCourseComponent } from './search-course/search-course.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesContainerComponent } from './courses-container/courses-container.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {FormsModule} from '@angular/forms';
     CourseItemComponent,
     CoursesContainerComponent,
   ],
-    imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   exports: [CoursesContainerComponent],
 })
 export class CoursesPageModule {}

@@ -55,8 +55,13 @@
           align-items: center;
         }
 
+        &__duration {
+          .course-data-text {
+            margin-right: 16px;
+          }
+        }
+
         &-text {
-          width: 58px;
           height: 15px;
           margin-left: 8px;
           font-family: 'Source Sans Pro';
