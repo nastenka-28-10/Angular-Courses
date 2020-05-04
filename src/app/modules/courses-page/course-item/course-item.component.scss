@@ -74,8 +74,10 @@
       margin-left: 88px;
       display: flex;
 
-      &__edit,
-      &__delete {
+      .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 3px;
         background-color: $dark-sky-blue;
         font-family: 'Source Sans Pro';
@@ -85,6 +87,10 @@
         letter-spacing: -0.09px;
         color: $white;
         cursor: pointer;
+
+        &:hover {
+          background-color: $dark-blue;
+        }
       }
 
       &__edit {
@@ -96,6 +102,10 @@
         width: 86px;
         height: 24px;
         margin-left: 12px;
+      }
+
+      &__text {
+        margin-left: 8px;
       }
     }
   }

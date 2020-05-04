@@ -41,10 +41,15 @@
     background-color: $sick-green;
     color: $white;
     border-radius: 3px;
+    font-family: 'Source Sans Pro';
     font-size: 18px;
     font-weight: 600;
     line-height: 2.56;
     letter-spacing: -0.13px;
     cursor: pointer;
+
+    &:hover {
+      background-color: $dark-green;
+    }
   }
 }

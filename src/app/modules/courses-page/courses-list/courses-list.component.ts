@@ -97,4 +97,8 @@ export class CoursesListComponent implements OnInit {
   onDeleteCourse(event): void {
     console.log(event.id);
   }
+
+  onClickLoadMore(): void {
+    console.log('Load more button pressed');
+  }
 }
