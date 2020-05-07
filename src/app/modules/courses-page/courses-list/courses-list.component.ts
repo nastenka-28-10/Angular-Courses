@@ -1,12 +1,12 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { CourseItem } from 'app/interfaces/course-item';
-import { FilterByCourseNamePipe} from 'app/modules/courses-page/filter-by-course-name-pipe/filter-by-course-name.pipe';
+import { FilterByCourseNamePipe } from 'app/modules/courses-page/filter-by-course-name-pipe/filter-by-course-name.pipe';
 
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
-  providers: [FilterByCourseNamePipe]
+  providers: [FilterByCourseNamePipe],
 })
 export class CoursesListComponent implements OnInit, OnChanges {
   @Input() courseNameToSearch: string;
@@ -107,7 +107,10 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.courseNameToSearch) {
-      this.coursesListToShow = this.filterByCourseNamePipe.transform(this.coursesList, this.courseNameToSearch);
+      this.coursesListToShow = this.filterByCourseNamePipe.transform(
+        this.coursesList,
+        this.courseNameToSearch,
+      );
     }
   }
 
