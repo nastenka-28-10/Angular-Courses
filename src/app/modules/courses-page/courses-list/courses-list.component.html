@@ -3,7 +3,9 @@
     <div class="add-icon"></div>
     <div class="add-course-text">Add course</div>
   </button>
-  <app-course-item *ngFor="let item of coursesList" [courseItem]="item" (deleteCourse)="onDeleteCourse($event)"></app-course-item>
+  <app-course-item *ngFor="let item of coursesList"
+                   [courseItem]="item"
+                   (deleteCourse)="onDeleteCourse($event)"></app-course-item>
   <div class="courses-list__load-more">
     <button class="load-more-button" (click)="onClickLoadMore()">Load more</button>
   </div>

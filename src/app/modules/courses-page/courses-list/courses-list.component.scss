@@ -21,6 +21,10 @@
     color: $white;
     cursor: pointer;
 
+    &:hover {
+      background-color: $dark-blue;
+    }
+
     .add-icon {
       position: relative;
       width: 18px;

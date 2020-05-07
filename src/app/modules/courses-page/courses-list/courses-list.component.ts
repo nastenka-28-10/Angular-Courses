@@ -16,7 +16,7 @@ export class CoursesListComponent implements OnInit {
       {
         id: 1,
         title: 'Course 1',
-        creationDate: new Date('11/08/2019').toString(),
+        creationDate: new Date('11/08/2020').toString(),
         durationMinutes: 60,
         description:
           'Learn about where you can find course descriptions,\n' +
@@ -29,7 +29,7 @@ export class CoursesListComponent implements OnInit {
       {
         id: 2,
         title: 'Course 2',
-        creationDate: new Date('11/01/2019').toString(),
+        creationDate: new Date('05/01/2020').toString(),
         durationMinutes: 30,
         description:
           'Learn about where you can find course descriptions,\n' +
@@ -42,7 +42,7 @@ export class CoursesListComponent implements OnInit {
       {
         id: 3,
         title: 'Course 3',
-        creationDate: new Date('12/01/2019').toString(),
+        creationDate: new Date('04/29/2019').toString(),
         durationMinutes: 90,
         description:
           'Learn about where you can find course descriptions,\n' +
@@ -68,7 +68,7 @@ export class CoursesListComponent implements OnInit {
       {
         id: 5,
         title: 'Course 5',
-        creationDate: new Date('10/20/2019').toString(),
+        creationDate: new Date('05/25/2020').toString(),
         durationMinutes: 120,
         description:
           'Learn about where you can find course descriptions,\n' +
@@ -81,7 +81,7 @@ export class CoursesListComponent implements OnInit {
       {
         id: 6,
         title: 'Course 6',
-        creationDate: new Date('10/20/2019').toString(),
+        creationDate: new Date('05/6/2020').toString(),
         durationMinutes: 60,
         description:
           'Learn about where you can find course descriptions,\n' +

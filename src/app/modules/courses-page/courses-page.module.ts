@@ -5,6 +5,7 @@ import { SearchCourseComponent } from './search-course/search-course.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesContainerComponent } from './courses-container/courses-container.component';
+import { CourseBorderDirective } from './course-border/course-border.directive';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     CoursesListComponent,
     CourseItemComponent,
     CoursesContainerComponent,
+    CourseBorderDirective,
   ],
   imports: [CommonModule, FormsModule],
   exports: [CoursesContainerComponent],
