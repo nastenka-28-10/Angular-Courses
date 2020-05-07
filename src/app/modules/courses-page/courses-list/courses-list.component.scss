@@ -77,4 +77,21 @@
       }
     }
   }
+
+  &__no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    height: 48px;
+    border-radius: 6px;
+    box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+    background-color: $white;
+    font-family: 'Source Sans Pro';
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.19px;
+    color: $slate-grey;
+    text-transform: uppercase;
+  }
 }
