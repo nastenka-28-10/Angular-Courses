@@ -1,7 +1,20 @@
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome.scss';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url('app/../assets/fonts/Oswald/static/Oswald-Regular.ttf');
+}
+
+@font-face {
+  font-family: Oswald-Medium;
+  src: url('app/../assets/fonts/Oswald/static/Oswald-Medium.ttf');
 }
 
 button,

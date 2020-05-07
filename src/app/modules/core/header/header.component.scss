@@ -1,6 +1,68 @@
 @import 'app/constants/constants';
 
 .header {
+  display: flex;
   height: 64px;
+  padding: 0 39px 0 85px;
   background-color: $charcoal-grey;
+
+  &__logo-btn {
+    display: flex;
+    align-items: center;
+    height: inherit;
+    width: max-content;
+    cursor: pointer;
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      margin: 0 10px 0 0;
+      background: url('app/../assets/logo.svg') no-repeat center;
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-family: Oswald-Medium;
+      letter-spacing: 0.25px;
+      color: $white;
+      text-transform: uppercase;
+    }
+  }
+
+  &__login-logoff-container {
+    margin-left: auto;
+    display: flex;
+
+    .login-logoff-text {
+      margin-left: 10px;
+      font-family: 'Source Sans Pro';
+      font-size: 14px;
+      color: $white;
+    }
+
+    .login-wrapper {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &__icon {
+        width: 10px;
+        height: 12px;
+        background: url('app/../assets/ic-user.svg') no-repeat center;
+      }
+    }
+
+    .logoff-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: 25px;
+      cursor: pointer;
+
+      &__icon {
+        width: 16px;
+        height: 12px;
+        background: url('app/../assets/ic-exit.svg') no-repeat center;
+      }
+    }
+  }
 }

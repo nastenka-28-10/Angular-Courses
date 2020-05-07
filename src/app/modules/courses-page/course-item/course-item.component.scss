@@ -3,7 +3,110 @@
 .course-item {
   height: 163px;
   margin: 12px 0 24px;
+  padding: 24px;
   border-radius: 8px;
   box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
   background-color: $white;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    .course-title {
+      font-family: 'Source Sans Pro';
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: $dark;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+
+    .course-description {
+      position: relative;
+      height: 77px;
+      flex-grow: 1;
+      color: $slate-grey;
+
+      &__text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        font-family: 'Source Sans Pro';
+        font-size: 14px;
+        line-height: 1.71;
+      }
+
+      .course-data {
+        position: absolute;
+        right: 0;
+        top: -30px;
+        display: flex;
+        color: $light-silver;
+
+        &__duration,
+        &__date {
+          display: flex;
+          align-items: center;
+        }
+
+        &__duration {
+          .course-data-text {
+            margin-right: 16px;
+          }
+        }
+
+        &-text {
+          height: 15px;
+          margin-left: 8px;
+          font-family: 'Source Sans Pro';
+          font-size: 12px;
+        }
+      }
+    }
+
+    .course-actions {
+      margin-left: 88px;
+      display: flex;
+
+      .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        background-color: $dark-sky-blue;
+        font-family: 'Source Sans Pro';
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.83;
+        letter-spacing: -0.09px;
+        color: $white;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $dark-blue;
+        }
+      }
+
+      &__edit {
+        width: 75px;
+        height: 24px;
+      }
+
+      &__delete {
+        width: 86px;
+        height: 24px;
+        margin-left: 12px;
+      }
+
+      &__text {
+        margin-left: 8px;
+      }
+    }
+  }
 }

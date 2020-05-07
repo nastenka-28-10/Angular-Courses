@@ -1,1 +1,32 @@
-<div class="course-item"></div>
+<div class="course-item">
+  <div class="course-item__header">
+    <div class="course-title">{{courseItem.title}}</div>
+  </div>
+  <div class="course-item__content">
+    <div class="course-description">
+      <div class="course-data">
+        <div class="course-data__duration">
+          <div class="fa fa-clock-o"></div>
+          <div class="course-data-text">{{courseItem.durationMinutes}}</div>
+        </div>
+        <div class="course-data__date">
+          <div class="fa fa-calendar"></div>
+          <div class="course-data-text">{{courseItem.creationDate | date: 'mediumDate'}}</div>
+        </div>
+      </div>
+      <div class="course-description__text">
+        {{courseItem.description}}
+      </div>
+    </div>
+    <div class="course-actions">
+      <button class="course-actions__edit action">
+        <div class="fa fa-edit"></div>
+        <div class="course-actions__text">Edit</div>
+      </button>
+      <button class="course-actions__delete action" (click)="onClickDelete()">
+        <div class="fa fa-trash"></div>
+        <div class="course-actions__text">Delete</div>
+      </button>
+    </div>
+  </div>
+</div>
