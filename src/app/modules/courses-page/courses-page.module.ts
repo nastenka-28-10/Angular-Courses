@@ -9,6 +9,7 @@ import { CourseBorderDirective } from './course-border/course-border.directive';
 import { FormsModule } from '@angular/forms';
 import {CoreModule} from 'app/modules/core/core.module';
 import { OrderByPipe } from 'app/modules/courses-page/order-by-pipe/order-by.pipe';
+import { FilterByCourseNamePipe } from 'app/modules/courses-page/filter-by-course-name-pipe/filter-by-course-name.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { OrderByPipe } from 'app/modules/courses-page/order-by-pipe/order-by.pip
     CourseItemComponent,
     CoursesContainerComponent,
     CourseBorderDirective,
-    OrderByPipe
+    OrderByPipe,
+    FilterByCourseNamePipe
   ],
   imports: [CommonModule, FormsModule, CoreModule],
   exports: [CoursesContainerComponent],
