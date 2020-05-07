@@ -25,6 +25,7 @@ export class CoursesListComponent implements OnInit {
           "        or college's classes. They're published both in course catalogs that outline degree\n" +
           '        requirements and in course schedules that contain descriptions for all courses offered\n' +
           '        during a particular semester',
+        topRated: false,
       },
       {
         id: 2,
@@ -38,6 +39,7 @@ export class CoursesListComponent implements OnInit {
           "        or college's classes. They're published both in course catalogs that outline degree\n" +
           '        requirements and in course schedules that contain descriptions for all courses offered\n' +
           '        during a particular semester',
+        topRated: true,
       },
       {
         id: 3,
@@ -51,6 +53,7 @@ export class CoursesListComponent implements OnInit {
           "        or college's classes. They're published both in course catalogs that outline degree\n" +
           '        requirements and in course schedules that contain descriptions for all courses offered\n' +
           '        during a particular semester',
+        topRated: true,
       },
       {
         id: 4,
@@ -64,6 +67,7 @@ export class CoursesListComponent implements OnInit {
           "        or college's classes. They're published both in course catalogs that outline degree\n" +
           '        requirements and in course schedules that contain descriptions for all courses offered\n' +
           '        during a particular semester',
+        topRated: true,
       },
       {
         id: 5,
@@ -77,6 +81,7 @@ export class CoursesListComponent implements OnInit {
           "        or college's classes. They're published both in course catalogs that outline degree\n" +
           '        requirements and in course schedules that contain descriptions for all courses offered\n' +
           '        during a particular semester',
+        topRated: false,
       },
       {
         id: 6,
@@ -90,6 +95,7 @@ export class CoursesListComponent implements OnInit {
           "        or college's classes. They're published both in course catalogs that outline degree\n" +
           '        requirements and in course schedules that contain descriptions for all courses offered\n' +
           '        during a particular semester',
+        topRated: true,
       },
     ];
   }
