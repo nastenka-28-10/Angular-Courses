@@ -4,7 +4,7 @@
     <div class="add-course-text">Add course</div>
   </button>
   <div class="courses-list-wrapper" *ngIf="coursesList.length">
-    <app-course-item *ngFor="let item of coursesList"
+    <app-course-item *ngFor="let item of coursesList | orderBy"
                      [courseItem]="item"
                      (deleteCourse)="onDeleteCourse($event)"></app-course-item>
     <div class="courses-list__load-more">

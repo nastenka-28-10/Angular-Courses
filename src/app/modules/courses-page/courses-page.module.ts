@@ -7,6 +7,8 @@ import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesContainerComponent } from './courses-container/courses-container.component';
 import { CourseBorderDirective } from './course-border/course-border.directive';
 import { FormsModule } from '@angular/forms';
+import {CoreModule} from 'app/modules/core/core.module';
+import { OrderByPipe } from 'app/modules/courses-page/order-by-pipe/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,9 @@ import { FormsModule } from '@angular/forms';
     CourseItemComponent,
     CoursesContainerComponent,
     CourseBorderDirective,
+    OrderByPipe
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CoreModule],
   exports: [CoursesContainerComponent],
 })
 export class CoursesPageModule {}

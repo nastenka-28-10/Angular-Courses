@@ -1,6 +1,6 @@
 <div class="course-item" [ngClass]="{'course-item--top-rated': courseItem.topRated}" [appCourseBorder]="courseItem.creationDate">
   <div class="course-item__header">
-    <div class="course-title">{{courseItem.title}}</div>
+    <div class="course-title">{{courseItem.title | uppercase}}</div>
     <i *ngIf="courseItem.topRated" class="fa fa-star"></i>
   </div>
   <div class="course-item__content">
@@ -8,7 +8,7 @@
       <div class="course-data">
         <div class="course-data__duration">
           <div class="fa fa-clock-o"></div>
-          <div class="course-data-text">{{courseItem.durationMinutes}}</div>
+          <div class="course-data-text">{{courseItem.durationMinutes | duration}}</div>
         </div>
         <div class="course-data__date">
           <div class="fa fa-calendar"></div>
