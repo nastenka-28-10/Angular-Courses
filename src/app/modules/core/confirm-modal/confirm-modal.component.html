@@ -1,0 +1,20 @@
+<div class="confirm-modal">
+  <div class="confirm-modal-window">
+    <header class="confirm-modal-window-header">
+      {{ modalHeader }}
+    </header>
+    <div class="confirm-modal-window-body">
+      <div class="confirm-modal-window-question">
+        {{ modalQuestion }}
+      </div>
+      <div class="confirm-modal-window-buttons">
+        <button class="action-button no" (click)="onCancel()">
+          {{ cancelMessage }}
+        </button>
+        <button class="action-button yes" (click)="onConfirm()">
+          {{ confirmMessage }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
