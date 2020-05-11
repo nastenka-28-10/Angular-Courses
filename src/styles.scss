@@ -2,12 +2,6 @@ $fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome.scss';
 @import 'app/styles/constants';
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 @font-face {
   font-family: Oswald;
   src: url('app/../assets/fonts/Oswald/static/Oswald-Regular.ttf');
@@ -18,10 +12,21 @@ $fa-font-path: '~font-awesome/fonts';
   src: url('app/../assets/fonts/Oswald/static/Oswald-Medium.ttf');
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 button,
 input {
   outline: none;
   border: none;
+  background-color: transparent;
+}
+
+a {
+  text-decoration: none;
 }
 
 .root {
@@ -34,4 +39,10 @@ app-courses-container {
   flex-grow: 1;
   overflow: auto;
   background-color: $pale-grey-two;
+}
+
+app-login-form {
+  flex-grow: 1;
+  background-color: $pale-grey-two;
+  padding: 24px 85px 79px;
 }

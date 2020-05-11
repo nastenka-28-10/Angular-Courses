@@ -1,0 +1,113 @@
+@import 'app/styles/constants';
+
+.login-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  width: 368px;
+  height: 298px;
+  border-radius: 6px;
+  box-shadow: 0 1px 24px 0 $box-shadow2;
+  background-color: $white;
+
+  &-header {
+    margin-bottom: 24px;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: $dark;
+  }
+
+  &-input-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 9px;
+
+    &-left {
+      font-family: Source Sans Pro, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.22px;
+      color: $slate-grey;
+    }
+
+    &-right {
+      font-family: Source Sans Pro, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      letter-spacing: 0.19px;
+      text-align: right;
+      color: $battleship-grey;
+    }
+  }
+
+  &-input-container {
+    margin-bottom: 12px;
+    padding: 6px 12px;
+    width: 320px;
+    height: 36px;
+    border-radius: 3px;
+    border: solid 1px $pale-grey;
+
+    &:last-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  &-input {
+    width: 200px;
+    height: 24px;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 14px;
+    line-height: 1.71;
+    letter-spacing: 0.22px;
+    color: $battleship-grey;
+  }
+
+  &-footer {
+    display: flex;
+    padding-left: 12px;
+    width: 320px;
+    height: 36px;
+    justify-content: space-between;
+  }
+
+  &-footer-link {
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.19px;
+    color: $soft-blue-two;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      color: $dark-blue;
+    }
+  }
+
+  &-footer-btn {
+    width: 68px;
+    height: 36px;
+    border-radius: 3px;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 2.57;
+    letter-spacing: -0.1px;
+    background-color: $sick-green;
+    color: $white;
+    cursor: pointer;
+    &:hover {
+      background-color: $dark-green;
+    }
+
+    &:disabled {
+      background-color: $pale-grey;
+      color: $cool-grey;
+      cursor: not-allowed;
+    }
+  }
+}

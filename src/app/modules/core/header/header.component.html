@@ -1,16 +1,16 @@
 <header class="header">
-  <div class="header__logo-btn">
+  <a class="header__logo-btn" [routerLink]="['/courses']">
     <div class="logo"></div>
     <div class="logo-text">Video Course</div>
-  </div>
+  </a>
   <div class="header__login-logoff-container">
-    <div class="login-wrapper">
+    <a class="login-wrapper" *ngIf="!isAuthenticated" [routerLink]="['/login']">
       <div class="login-wrapper__icon"></div>
       <div class="login-logoff-text">User login</div>
-    </div>
-    <div class="logoff-wrapper">
+    </a>
+    <a class="logoff-wrapper" *ngIf="isAuthenticated" (click)="onLogOff()" [routerLink]="['/login']">
       <div class="logoff-wrapper__icon"></div>
       <div class="login-logoff-text">Log off</div>
-    </div>
+    </a>
   </div>
 </header>
