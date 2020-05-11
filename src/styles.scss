@@ -1,5 +1,6 @@
 $fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome.scss';
+@import 'app/styles/constants';
 
 * {
   margin: 0;
@@ -32,4 +33,5 @@ input {
 app-courses-container {
   flex-grow: 1;
   overflow: auto;
+  background-color: $pale-grey-two;
 }

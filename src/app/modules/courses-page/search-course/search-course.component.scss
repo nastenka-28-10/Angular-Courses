@@ -1,7 +1,8 @@
-@import 'app/constants/constants';
+@import 'app/styles/constants';
 
 .search-container {
   display: flex;
+  margin-bottom: 24px;
 
   &__wrapper {
     display: flex;

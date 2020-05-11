@@ -1,4 +1,4 @@
-@import 'app/constants/constants';
+@import 'app/styles/constants';
 
 .course-item {
   height: 163px;
@@ -14,11 +14,16 @@
     margin-bottom: 8px;
 
     .course-title {
+      margin-right: 5px;
       font-family: 'Source Sans Pro';
       font-size: 24px;
       font-weight: 600;
       line-height: 1.25;
       color: $dark;
+    }
+
+    i {
+      color: $gold-star;
     }
   }
 
@@ -109,4 +114,8 @@
       }
     }
   }
+}
+
+.course-item--top-rated {
+  background-color: $top-rated;
 }

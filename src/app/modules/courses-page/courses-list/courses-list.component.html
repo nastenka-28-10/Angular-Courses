@@ -3,8 +3,15 @@
     <div class="add-icon"></div>
     <div class="add-course-text">Add course</div>
   </button>
-  <app-course-item *ngFor="let item of coursesList" [courseItem]="item" (deleteCourse)="onDeleteCourse($event)"></app-course-item>
-  <div class="courses-list__load-more">
-    <button class="load-more-button" (click)="onClickLoadMore()">Load more</button>
+  <div class="courses-list-wrapper" *ngIf="coursesListToShow.length">
+    <app-course-item *ngFor="let item of coursesListToShow | orderBy"
+                     [courseItem]="item"
+                     (deleteCourse)="onDeleteCourse($event)"></app-course-item>
+    <div class="courses-list__load-more">
+      <button class="load-more-button" (click)="onClickLoadMore()">Load more</button>
+    </div>
+  </div>
+  <div class="courses-list__no-data" *ngIf="!coursesListToShow.length">
+    No data. Feel free to add new course
   </div>
 </div>
