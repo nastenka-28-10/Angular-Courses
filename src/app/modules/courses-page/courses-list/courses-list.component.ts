@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { CourseItem } from 'app/interfaces/course-item';
-import { FilterByCourseNamePipe } from 'app/modules/courses-page/filter-by-course-name-pipe/filter-by-course-name.pipe';
+import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 
 @Component({

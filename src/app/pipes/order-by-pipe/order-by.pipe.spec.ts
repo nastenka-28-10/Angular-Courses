@@ -1,4 +1,4 @@
-import { OrderByPipe } from 'app/modules/courses-page/order-by-pipe/order-by.pipe';
+import { OrderByPipe } from 'app/pipes/order-by-pipe/order-by.pipe';
 
 describe('OrderByPipe', () => {
   it('create an instance', () => {
