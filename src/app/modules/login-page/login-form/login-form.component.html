@@ -1,0 +1,38 @@
+<div class="login-form">
+  <div class="login-form-header">
+    Login
+  </div>
+  <div class="login-form-input-header">
+    <div class="login-form-input-header-left">
+      Email
+    </div>
+    <div class="login-form-input-header-right">
+      *required
+    </div>
+  </div>
+  <div class="login-form-input-container">
+    <input [(ngModel)]="mail" type="text" class="login-form-input" placeholder="Enter e-mail">
+  </div>
+
+  <div class="login-form-input-header">
+    <div class="login-form-input-header-left">
+      Password
+    </div>
+    <div class="login-form-input-header-right">
+      *required
+    </div>
+  </div>
+  <div class="login-form-input-container">
+    <input [(ngModel)]="password" type="password" class="login-form-input" placeholder="Enter password">
+  </div>
+
+  <div class="login-form-footer">
+    <button class="login-form-footer-link">
+      Forgot password?
+    </button>
+    <button class="login-form-footer-btn" (click)="onLogin()"
+            [disabled]="!areDataValid" [routerLink]="['/courses']">
+      Login
+    </button>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+@import 'app/styles/constants.scss';
+
+.confirm-modal {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: $modal-background;
+
+  &-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    width: 394px;
+    height: 212px;
+    border-radius: 6px;
+    box-shadow: 0 1px 24px 0 $box-shadow1;
+    background-color: $white;
+
+    &-header {
+      padding-left: 24px;
+      height: 60px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      background-color: $light-gray;
+      font-family: Source Sans Pro;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 60px;
+      letter-spacing: 0.1px;
+      color: $slate-grey;
+    }
+
+    &-body {
+      font-family: Source Sans Pro;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.83;
+      letter-spacing: -0.09px;
+      padding: 24px;
+    }
+
+    &-question {
+      height: 48px;
+      font-family: Source Sans Pro;
+      font-size: 14px;
+      line-height: 1.71;
+      color: $slate-grey;
+    }
+
+    &-buttons {
+      display: flex;
+      margin-top: 25px;
+      float: right;
+      .action-button {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px 0;
+        border-radius: 3px;
+        font-family: Source Sans Pro;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.1px;
+        cursor: pointer;
+      }
+
+      .action-button.yes {
+        margin-left: 18px;
+        color: $white;
+        background-color: $sick-green;
+        &:hover {
+          background-color: $dark-green;
+        }
+      }
+
+      .action-button.no {
+        color: $slate-grey;
+        background-color: $pale-grey;
+        &:hover {
+          background-color: $light-silver;
+        }
+      }
+    }
+  }
+}

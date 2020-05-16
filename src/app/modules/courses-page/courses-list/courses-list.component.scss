@@ -58,7 +58,7 @@
     align-items: center;
     height: 48px;
     border-radius: 6px;
-    box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+    box-shadow: 0 1px 24px 0 $box-shadow2;
     background-color: $white;
 
     .load-more-button {
@@ -85,7 +85,7 @@
     margin-top: 24px;
     height: 48px;
     border-radius: 6px;
-    box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+    box-shadow: 0 1px 24px 0 $box-shadow2;
     background-color: $white;
     font-family: 'Source Sans Pro';
     font-size: 14px;
