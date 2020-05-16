@@ -1,4 +1,4 @@
-import { FilterByCourseNamePipe } from 'app/modules/courses-page/filter-by-course-name-pipe/filter-by-course-name.pipe';
+import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
 
 describe('FilterByCourseNamePipe', () => {
   it('create an instance', () => {

@@ -4,12 +4,22 @@ $fa-font-path: '~font-awesome/fonts';
 
 @font-face {
   font-family: Oswald;
-  src: url('app/../assets/fonts/Oswald/static/Oswald-Regular.ttf');
+  src: url('assets/fonts/Oswald/static/Oswald-Regular.ttf');
 }
 
 @font-face {
   font-family: Oswald-Medium;
-  src: url('app/../assets/fonts/Oswald/static/Oswald-Medium.ttf');
+  src: url('assets/fonts/Oswald/static/Oswald-Medium.ttf');
+}
+
+@font-face {
+  font-family: Source Sans Pro;
+  src: url('assets/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf');
+}
+
+@font-face {
+  font-family: SourceSansPro-SemiBold;
+  src: url('assets/fonts/Source_Sans_Pro/SourceSansPro-SemiBold.ttf');
 }
 
 * {

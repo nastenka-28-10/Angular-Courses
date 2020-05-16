@@ -8,8 +8,8 @@ import { CoursesContainerComponent } from './courses-container/courses-container
 import { CourseBorderDirective } from './course-border/course-border.directive';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from 'app/modules/core/core.module';
-import { OrderByPipe } from 'app/modules/courses-page/order-by-pipe/order-by.pipe';
-import { FilterByCourseNamePipe } from 'app/modules/courses-page/filter-by-course-name-pipe/filter-by-course-name.pipe';
+import { OrderByPipe } from 'app/pipes/order-by-pipe/order-by.pipe';
+import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
 
 @NgModule({
   declarations: [

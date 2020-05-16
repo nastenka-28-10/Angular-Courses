@@ -18,7 +18,7 @@
   &__icon {
     width: 24px;
     height: 24px;
-    background: url('app/../assets/ic-search.svg') center no-repeat;
+    background: url('assets/ic-search.svg') center no-repeat;
   }
 
   &__input {
@@ -27,7 +27,7 @@
     margin-left: 6px;
 
     &::placeholder {
-      font-family: 'Source Sans Pro';
+      font-family: Source Sans Pro;
       font-size: 14px;
       line-height: 1.71;
       letter-spacing: 0.22px;
@@ -42,7 +42,7 @@
     background-color: $sick-green;
     color: $white;
     border-radius: 3px;
-    font-family: 'Source Sans Pro';
+    font-family: Source Sans Pro;
     font-size: 18px;
     font-weight: 600;
     line-height: 2.56;
