@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { CoreModule } from 'app/modules/core/core.module';
 import { OrderByPipe } from 'app/pipes/order-by-pipe/order-by.pipe';
 import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
+import { NewCourseComponent } from 'app/modules/courses-page/new-course/new-course.component';
+import { AppRoutingModule } from 'app/app-routing.module';
+import { CoursesContentComponent } from 'app/modules/courses-page/courses-content/courses-content.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +24,11 @@ import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/fil
     CourseBorderDirective,
     OrderByPipe,
     FilterByCourseNamePipe,
+    NewCourseComponent,
+    CoursesContentComponent,
+    CoursesContentComponent,
   ],
-  imports: [CommonModule, FormsModule, CoreModule],
-  exports: [CoursesContainerComponent],
+  imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule],
+  exports: [CoursesContainerComponent, NewCourseComponent, CoursesContentComponent],
 })
 export class CoursesPageModule {}

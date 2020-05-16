@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
 
   onLogOff(): void {
     this.authService.logout();
-    console.log('logout');
   }
 
   get isAuthenticated(): boolean {

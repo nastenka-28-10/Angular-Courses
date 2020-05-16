@@ -45,14 +45,17 @@ a {
   flex-direction: column;
 }
 
-app-courses-container {
+app-courses-container,
+app-login-form,
+app-new-course {
   flex-grow: 1;
-  overflow: auto;
   background-color: $pale-grey-two;
 }
 
+app-courses-container {
+  overflow: auto;
+}
+
 app-login-form {
-  flex-grow: 1;
-  background-color: $pale-grey-two;
   padding: 24px 85px 79px;
 }
