@@ -29,7 +29,8 @@ $fa-font-path: '~font-awesome/fonts';
 }
 
 button,
-input {
+input,
+textarea {
   outline: none;
   border: none;
   background-color: transparent;
@@ -47,7 +48,7 @@ a {
 
 app-courses-container,
 app-login-form,
-app-new-course {
+app-course-editor {
   flex-grow: 1;
   background-color: $pale-grey-two;
 }

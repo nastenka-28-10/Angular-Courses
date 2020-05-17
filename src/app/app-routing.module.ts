@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CoursesContainerComponent } from 'app/modules/courses-page/courses-container/courses-container.component';
 import { LoginFormComponent } from 'app/modules/login-page/login-form/login-form.component';
-import { NewCourseComponent } from 'app/modules/courses-page/new-course/new-course.component';
+import { CourseEditorComponent } from 'app/modules/courses-page/course-editor/course-editor.component';
 import { CoursesContentComponent } from 'app/modules/courses-page/courses-content/courses-content.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: 'new',
-        component: NewCourseComponent,
+        component: CourseEditorComponent,
       },
       {
         path: '',
