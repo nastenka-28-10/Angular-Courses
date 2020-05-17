@@ -1,5 +1,5 @@
-<form class="course-editor">
-  <h2 class="course-editor__title">New course</h2>
+<div class="course-editor">
+  <h2 class="course-editor__title">{{editorData.editorTitle}}</h2>
   <div class="course-editor__form-element">
     <div class="element-caption">
       <div class="element-caption__title">
@@ -9,7 +9,10 @@
         required
       </div>
     </div>
-    <input type="text" class="element-input title-input" placeholder="Text input">
+    <input type="text"
+           class="element-input title-input"
+           placeholder="Text input"
+           [(ngModel)]="editorData.courseTitle">
   </div>
 
   <div class="course-editor__form-element">
@@ -21,7 +24,10 @@
         required
       </div>
     </div>
-    <textarea type="text" class="element-input description-input" placeholder="Add description"></textarea>
+    <textarea type="text"
+              class="element-input description-input"
+              placeholder="Add description"
+              [(ngModel)]="editorData.courseDescription"></textarea>
   </div>
 
   <div class="course-editor__form-element duration-element">
@@ -33,7 +39,10 @@
         required
       </div>
     </div>
-    <input type="text" class="element-input duration-element__input" placeholder="minutes">
+    <input type="text"
+           class="element-input duration-element__input"
+           placeholder="minutes"
+           [(ngModel)]="editorData.courseDuration">
   </div>
 
   <div class="course-editor__form-element date-element">
@@ -45,7 +54,10 @@
         required
       </div>
     </div>
-    <input type="date" class="element-input date-element__input" placeholder="mm-dd-yyyy">
+    <input type="text"
+           class="element-input date-element__input"
+           placeholder="mm-dd-yyyy"
+           [(ngModel)]="editorData.courseDate">
   </div>
 
   <div class="course-editor__form-element authors-element">
@@ -57,11 +69,14 @@
         required
       </div>
     </div>
-    <input type="text" class="element-input authors-element__input" placeholder="Start typing">
+    <input type="text"
+           class="element-input authors-element__input"
+           placeholder="Start typing"
+           [(ngModel)]="editorData.courseAuthors">
   </div>
 
   <div class="course-editor__action-buttons">
-    <button class="cancel-course">Cancel</button>
-    <button class="save-course">Save</button>
+    <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>
+    <button class="save-course" (click)="onSaveCourse()">Save</button>
   </div>
-</form>
+</div>

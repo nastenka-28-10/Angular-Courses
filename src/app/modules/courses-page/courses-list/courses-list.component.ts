@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
-import { CourseItem } from 'app/interfaces/course-item';
+import { CourseItemInterface } from 'app/interfaces/course-item-interface';
 import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 
@@ -11,9 +11,9 @@ import { CoursesDataService } from 'app/modules/courses-page/courses-data-servic
 })
 export class CoursesListComponent implements OnInit, OnChanges {
   @Input() courseNameToSearch: string;
-  coursesList: CourseItem[] = [];
-  coursesListToShow: CourseItem[] = [];
-  courseToDelete: CourseItem | null;
+  coursesList: CourseItemInterface[] = [];
+  coursesListToShow: CourseItemInterface[] = [];
+  courseToDelete: CourseItemInterface | null;
   isModalOpen = false;
 
   constructor(
@@ -22,8 +22,10 @@ export class CoursesListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.coursesList = this.coursesDataService.getCoursesList();
-    this.coursesListToShow = [...this.coursesList];
+    this.coursesDataService.getCoursesList().then((coursesList) => {
+      this.coursesList = coursesList;
+      this.coursesListToShow = [...this.coursesList];
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -32,13 +34,13 @@ export class CoursesListComponent implements OnInit, OnChanges {
     }
   }
 
-  onClickDeleteCourse(deletedCourse: CourseItem): void {
+  onClickDeleteCourse(deletedCourse: CourseItemInterface): void {
     this.courseToDelete = deletedCourse;
     this.isModalOpen = true;
   }
 
-  onConfirmModalWindow() {
-    this.coursesDataService.removeItem(this.courseToDelete.id);
+  async onConfirmModalWindow() {
+    await this.coursesDataService.removeCourse(this.courseToDelete.id);
     this.updateCoursesListToShow();
   }
 

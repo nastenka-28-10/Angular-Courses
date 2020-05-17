@@ -1,6 +1,6 @@
-import { CourseItem } from 'app/interfaces/course-item';
+import { CourseItemInterface } from 'app/interfaces/course-item-interface';
 
-export const COURSES: CourseItem[] = [
+export const COURSES: CourseItemInterface[] = [
   {
     id: 1,
     title: 'React',
@@ -14,6 +14,7 @@ export const COURSES: CourseItem[] = [
       '        requirements and in course schedules that contain descriptions for all courses offered\n' +
       '        during a particular semester',
     topRated: true,
+    authors: 'Ivan',
   },
   {
     id: 2,
@@ -28,6 +29,7 @@ export const COURSES: CourseItem[] = [
       '        requirements and in course schedules that contain descriptions for all courses offered\n' +
       '        during a particular semester',
     topRated: false,
+    authors: 'Anatolii',
   },
   {
     id: 3,
@@ -42,6 +44,7 @@ export const COURSES: CourseItem[] = [
       '        requirements and in course schedules that contain descriptions for all courses offered\n' +
       '        during a particular semester',
     topRated: false,
+    authors: 'Mariia',
   },
   {
     id: 4,
@@ -56,6 +59,7 @@ export const COURSES: CourseItem[] = [
       '        requirements and in course schedules that contain descriptions for all courses offered\n' +
       '        during a particular semester',
     topRated: true,
+    authors: 'Sergei',
   },
   {
     id: 5,
@@ -70,6 +74,7 @@ export const COURSES: CourseItem[] = [
       '        requirements and in course schedules that contain descriptions for all courses offered\n' +
       '        during a particular semester',
     topRated: true,
+    authors: 'Irina',
   },
   {
     id: 6,
@@ -84,5 +89,6 @@ export const COURSES: CourseItem[] = [
       '        requirements and in course schedules that contain descriptions for all courses offered\n' +
       '        during a particular semester',
     topRated: false,
+    authors: 'Vladislav',
   },
 ];
