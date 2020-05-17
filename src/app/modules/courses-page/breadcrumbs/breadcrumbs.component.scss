@@ -1,14 +1,35 @@
 @import 'app/styles/constants';
 
-.breadcrumbs {
+.courses-breadcrumbs {
+  position: sticky;
+  top: 0px;
   display: flex;
+  height: 64px;
   align-items: center;
   padding: 0 0 0 85px;
-  height: 64px;
   background-color: $white;
-  font-family: Source Sans Pro;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.71;
-  color: $dark;
+  z-index: 1;
+
+  &__element {
+    margin-right: 5px;
+    font-family: Source Sans Pro;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.71;
+    color: $dark;
+    cursor: pointer;
+
+    &::after {
+      content: '/';
+      color: $dark;
+    }
+
+    &:last-child::after {
+      content: '';
+    }
+  }
+
+  &__element--active {
+    color: $dark-sky-blue;
+  }
 }

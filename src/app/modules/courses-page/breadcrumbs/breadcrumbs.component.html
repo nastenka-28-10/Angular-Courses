@@ -1,3 +1,23 @@
-<div class="breadcrumbs">
-Courses
+<div class="courses-breadcrumbs">
+  <div class="courses-breadcrumbs__element"
+       [routerLink]="['/courses']"
+       [routerLinkActive]="'courses-breadcrumbs__element--active'"
+       [routerLinkActiveOptions]="{exact:true}">
+    Courses
+  </div>
+  <div class="courses-breadcrumbs__element"
+       *ngIf="courseItem"
+       [routerLink]="['/courses', courseItem.id]"
+       [routerLinkActive]="'courses-breadcrumbs__element--active'"
+       [routerLinkActiveOptions]="{exact:true}">
+    {{courseItem.title}}
+  </div>
+
+  <div class="courses-breadcrumbs__element"
+       *ngIf="newCourseModeTitleForBreadcrumbs"
+       [routerLink]="['/courses/new']"
+       [routerLinkActive]="'courses-breadcrumbs__element--active'"
+       [routerLinkActiveOptions]="{exact:true}">
+    {{newCourseModeTitleForBreadcrumbs}}
+  </div>
 </div>

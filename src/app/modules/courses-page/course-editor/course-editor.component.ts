@@ -50,7 +50,8 @@ export class CourseEditorComponent implements OnInit {
 
   async onSaveCourse() {
     if (!this.courseItem) {
-      const newCourseId = (await this.coursesDataService.getCoursesList()).length + 1;
+      const coursesList = await this.coursesDataService.getCoursesList();
+      const newCourseId = Math.max(...coursesList.map((courseItem) => courseItem.id)) + 1;
       const newCourse: CourseItemInterface = {
         id: newCourseId,
         title: this.editorData.courseTitle,

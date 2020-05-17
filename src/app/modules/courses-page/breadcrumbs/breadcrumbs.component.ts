@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -6,7 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent implements OnInit {
-  constructor() {}
+  public courseItem = null;
+  public newCourseModeTitleForBreadcrumbs: string | null = null;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private coursesDataService: CoursesDataService) {}
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const urlParts = event.urlAfterRedirects.split('/').slice(1);
+
+        if (urlParts.length > 1) {
+          const secondUrlPart = urlParts[1];
+          if (!isNaN(+secondUrlPart) && typeof +secondUrlPart === 'number') {
+            this.newCourseModeTitleForBreadcrumbs = null;
+            this.coursesDataService.getCourseById(+secondUrlPart).then((courseItem) => {
+              this.courseItem = courseItem ? courseItem : null;
+            });
+          } else if (secondUrlPart === 'new') {
+            this.courseItem = null;
+            this.newCourseModeTitleForBreadcrumbs = 'New course';
+          }
+        } else {
+          this.courseItem = null;
+          this.newCourseModeTitleForBreadcrumbs = null;
+        }
+      }
+    });
+  }
 }
