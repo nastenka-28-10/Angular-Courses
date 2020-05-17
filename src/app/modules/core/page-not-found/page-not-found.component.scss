@@ -1,0 +1,27 @@
+@import 'app/styles/constants';
+
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin-top: 6%;
+
+  &__error {
+    font-size: 70px;
+    font-family: Source Sans Pro;
+    color: $charcoal-grey;
+  }
+
+  &__return-link {
+    margin-top: 20px;
+    font-size: 30px;
+    font-family: Source Sans Pro;
+    font-weight: 600;
+    color: $dark-sky-blue;
+
+    &:hover {
+      color: $dark-blue;
+    }
+  }
+}

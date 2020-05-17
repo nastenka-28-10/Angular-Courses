@@ -8,7 +8,7 @@
   <div class="courses-breadcrumbs__element"
        *ngIf="courseItem"
        [routerLink]="['/courses', courseItem.id]"
-       [routerLinkActive]="'courses-breadcrumbs__element--active'"
+       [routerLinkActive]="'courses-breadcrumbs__element--active not-clickable'"
        [routerLinkActiveOptions]="{exact:true}">
     {{courseItem.title}}
   </div>
@@ -16,7 +16,7 @@
   <div class="courses-breadcrumbs__element"
        *ngIf="newCourseModeTitleForBreadcrumbs"
        [routerLink]="['/courses/new']"
-       [routerLinkActive]="'courses-breadcrumbs__element--active'"
+       [routerLinkActive]="'courses-breadcrumbs__element--active not-clickable'"
        [routerLinkActiveOptions]="{exact:true}">
     {{newCourseModeTitleForBreadcrumbs}}
   </div>

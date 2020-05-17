@@ -4,6 +4,7 @@ import { CoursesContainerComponent } from 'app/modules/courses-page/courses-cont
 import { LoginFormComponent } from 'app/modules/login-page/login-form/login-form.component';
 import { CourseEditorComponent } from 'app/modules/courses-page/course-editor/course-editor.component';
 import { CoursesContentComponent } from 'app/modules/courses-page/courses-content/courses-content.component';
+import { PageNotFoundComponent } from 'app/modules/core/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginFormComponent },
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

@@ -32,4 +32,8 @@
   &__element--active {
     color: $dark-sky-blue;
   }
+
+  .not-clickable {
+    cursor: auto;
+  }
 }

@@ -49,7 +49,8 @@ a {
 
 app-courses-container,
 app-login-form,
-app-course-editor {
+app-course-editor,
+app-page-not-found {
   flex-grow: 1;
   background-color: $pale-grey-two;
 }
@@ -60,4 +61,11 @@ app-courses-container {
 
 app-login-form {
   padding: 24px 85px 79px;
+}
+
+app-page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
 }
