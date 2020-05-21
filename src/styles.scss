@@ -29,7 +29,9 @@ $fa-font-path: '~font-awesome/fonts';
 }
 
 button,
-input {
+input,
+textarea,
+div {
   outline: none;
   border: none;
   background-color: transparent;
@@ -45,14 +47,25 @@ a {
   flex-direction: column;
 }
 
-app-courses-container {
+app-courses-container,
+app-login-form,
+app-course-editor,
+app-page-not-found {
   flex-grow: 1;
-  overflow: auto;
   background-color: $pale-grey-two;
 }
 
+app-courses-container {
+  overflow: auto;
+}
+
 app-login-form {
-  flex-grow: 1;
-  background-color: $pale-grey-two;
   padding: 24px 85px 79px;
+}
+
+app-page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
 }

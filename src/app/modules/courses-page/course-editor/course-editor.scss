@@ -1,0 +1,140 @@
+@import 'app/styles/constants';
+
+.course-editor {
+  display: flex;
+  flex-direction: column;
+  width: 731px;
+  margin: 24px auto;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 24px 0 $box-shadow2;
+  background-color: $white;
+
+  &__title {
+    margin-bottom: 22px;
+    font-family: Source Sans Pro;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: $dark;
+  }
+
+  &__form-element {
+    display: flex;
+    flex-direction: column;
+
+    &:last-child {
+      margin-bottom: 24px;
+    }
+
+    .element-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 9px;
+
+      &__title {
+        font-family: Source Sans Pro;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.22px;
+        color: $slate-grey;
+      }
+
+      &__required {
+        position: relative;
+        font-family: Source Sans Pro;
+        font-size: 12px;
+        line-height: 1.5;
+        letter-spacing: 0.19px;
+        text-align: right;
+        color: $battleship-grey;
+
+        &::before {
+          position: absolute;
+          left: -5px;
+          content: '*';
+        }
+      }
+    }
+
+    .element-input {
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 3px;
+      border: solid 1px $pale-grey;
+
+      &::placeholder {
+        font-family: Source Sans Pro;
+        font-size: 14px;
+        line-height: 1.71;
+        letter-spacing: 0.22px;
+        color: $silver;
+      }
+    }
+
+    .title-input {
+      height: 36px;
+    }
+
+    .description-input {
+      text-align: left;
+      resize: none;
+      height: 108px;
+    }
+  }
+
+  .duration-element,
+  .date-element {
+    width: 150px;
+
+    &__input {
+      height: 36px;
+    }
+  }
+
+  .authors-element {
+    width: 312px;
+
+    &__input {
+      height: 36px;
+    }
+  }
+
+  &__action-buttons {
+    display: flex;
+    margin-left: auto;
+
+    .cancel-course,
+    .save-course {
+      height: 36px;
+      padding: 0 18px;
+      border-radius: 3px;
+      font-family: Source Sans Pro;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 2.43;
+      letter-spacing: -0.1px;
+      cursor: pointer;
+    }
+
+    .cancel-course {
+      margin-right: 12px;
+      background-color: $pale-grey;
+      color: $slate-grey-two;
+
+      &:hover {
+        background-color: $light-silver;
+      }
+    }
+
+    .save-course {
+      background-color: $sick-green;
+      color: $white;
+
+      &:hover {
+        background-color: $dark-green;
+      }
+    }
+  }
+}

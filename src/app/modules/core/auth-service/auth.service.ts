@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
-import { User } from 'app/interfaces/user';
+import { UserInterface } from 'app/interfaces/user-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { User } from 'app/interfaces/user';
 export class AuthService {
   constructor() {}
 
-  login(user: User): void {
+  login(user: UserInterface): void {
     const token = uuid.v4();
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('accessToken', token);
@@ -26,7 +26,7 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo(): User {
+  getUserInfo(): UserInterface {
     return JSON.parse(localStorage.getItem('user'));
   }
 }
