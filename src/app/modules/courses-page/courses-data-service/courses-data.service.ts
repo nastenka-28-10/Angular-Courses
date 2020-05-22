@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 
 import { COURSES } from 'app/modules/courses-page/mock-courses';
 import { CourseItemInterface } from 'app/interfaces/course-item-interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesDataService {
-  async getCoursesList(): Promise<CourseItemInterface[]> {
-    return COURSES;
+  constructor(private http: HttpClient) {}
+
+  private BASE_URL = `http://localhost:3004`;
+
+  async getCoursesList(): Promise<any> {
+    return this.http.get(`${this.BASE_URL}/courses`).toPromise();
   }
 
-  async getCourseById(id: number): Promise<CourseItemInterface> {
-    return COURSES.filter((item: CourseItemInterface): boolean => item.id === id)[0];
+  async getCourseById(id: number): Promise<any> {
+    return this.http.get(`${this.BASE_URL}/courses/${id}`).toPromise();
   }
 
   async createCourse(newCourse: CourseItemInterface): Promise<CourseItemInterface> {

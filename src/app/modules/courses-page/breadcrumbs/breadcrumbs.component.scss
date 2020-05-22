@@ -29,6 +29,10 @@
     }
   }
 
+  .course-name {
+    text-transform: uppercase;
+  }
+
   &__element--active {
     color: $dark-sky-blue;
   }

@@ -37,10 +37,10 @@ export class CourseEditorComponent implements OnInit {
           this.courseItem = courseItem;
           this.editorData = {
             editorTitle: 'Edit course',
-            courseTitle: `${this.courseItem.title}`,
+            courseTitle: `${this.courseItem.name}`,
             courseDescription: `${this.courseItem.description}`,
-            courseDuration: `${this.courseItem.durationMinutes}`,
-            courseDate: `${this.courseItem.creationDate}`,
+            courseDuration: `${this.courseItem.length}`,
+            courseDate: `${this.courseItem.date}`,
             courseAuthors: `${this.courseItem.authors}`,
           };
         }
@@ -54,12 +54,12 @@ export class CourseEditorComponent implements OnInit {
       const newCourseId = Math.max(...coursesList.map((courseItem) => courseItem.id)) + 1;
       const newCourse: CourseItemInterface = {
         id: newCourseId,
-        title: this.editorData.courseTitle,
-        creationDate: this.editorData.courseDate,
-        durationMinutes: +this.editorData.courseDuration,
+        name: this.editorData.courseTitle,
+        date: this.editorData.courseDate,
+        length: +this.editorData.courseDuration,
         description: this.editorData.courseDescription,
         authors: this.editorData.courseAuthors,
-        topRated: false,
+        isTopRated: false,
       };
 
       await this.coursesDataService.createCourse(newCourse);
@@ -68,11 +68,11 @@ export class CourseEditorComponent implements OnInit {
     } else {
       const updatedCourse: CourseItemInterface = {
         id: +this.routeParams.id,
-        title: this.editorData.courseTitle,
-        creationDate: this.editorData.courseDate,
-        durationMinutes: +this.editorData.courseDuration,
+        name: this.editorData.courseTitle,
+        date: this.editorData.courseDate,
+        length: +this.editorData.courseDuration,
         description: this.editorData.courseDescription,
-        topRated: this.courseItem.topRated,
+        isTopRated: this.courseItem.isTopRated,
         authors: this.editorData.courseAuthors,
       };
 
