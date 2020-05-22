@@ -15,6 +15,8 @@ export class CoursesListComponent implements OnInit, OnChanges {
   coursesListToShow: CourseItemInterface[] = [];
   courseToDelete: CourseItemInterface | null;
   isModalOpen = false;
+  coursesNumber: number;
+  coursesShownNumber = 5;
 
   constructor(
     private filterByCourseNamePipe: FilterByCourseNamePipe,
@@ -22,9 +24,12 @@ export class CoursesListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.coursesDataService.getCoursesList().then((coursesList) => {
+    this.coursesDataService.getCoursesList().then((courses: CourseItemInterface[]) => {
+      this.coursesNumber = courses.length;
+    });
+    this.coursesDataService.getCoursesList(0, this.coursesShownNumber).then((coursesList) => {
       this.coursesList = coursesList;
-      this.coursesListToShow = [...this.coursesList];
+      this.coursesListToShow = [...coursesList];
     });
   }
 
@@ -50,7 +55,12 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   onClickLoadMore(): void {
-    console.log('Load more button pressed');
+    const start = this.coursesShownNumber;
+    this.coursesShownNumber += this.coursesShownNumber;
+    this.coursesDataService.getCoursesList(start, this.coursesShownNumber).then((coursesList) => {
+      this.coursesList = coursesList;
+      this.coursesListToShow = [...coursesList];
+    });
   }
 
   updateCoursesListToShow() {

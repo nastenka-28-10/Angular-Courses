@@ -12,8 +12,9 @@ export class CoursesDataService {
 
   private BASE_URL = `http://localhost:3004`;
 
-  async getCoursesList(): Promise<any> {
-    return this.http.get(`${this.BASE_URL}/courses`).toPromise();
+  async getCoursesList(start?: number, count?: number): Promise<any> {
+    if (!start && !count) { return this.http.get(`${this.BASE_URL}/courses`).toPromise(); }
+    return this.http.get(`${this.BASE_URL}/courses?start=${start}&count=${count}`).toPromise();
   }
 
   async getCourseById(id: number): Promise<any> {
