@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
-import * as uuid from 'uuid';
-import { UserInterface } from 'app/interfaces/user-interface';
+import { AuthData, UserInfo, UserInterface } from 'app/interfaces/user-interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  login(user: UserInterface): void {
-    const token = uuid.v4();
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('accessToken', token);
+  private BASE_URL = `http://localhost:3004`;
+
+  login(user: UserInterface): Promise<boolean> {
+    return this.http
+      .post<AuthData>(`${this.BASE_URL}/auth/login`, user)
+      .toPromise()
+      .then((res: AuthData) => {
+        localStorage.setItem('accessToken', res.token);
+        return true;
+      });
   }
 
   logout(): void {
-    localStorage.removeItem('user');
     localStorage.removeItem('accessToken');
   }
 
@@ -26,7 +31,10 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo(): UserInterface {
-    return JSON.parse(localStorage.getItem('user'));
+  getUserInfo(): Promise<UserInfo> {
+    const accessToken = localStorage.getItem('accessToken');
+    return this.http
+      .post<UserInfo>(`${this.BASE_URL}/auth/userinfo`, { token: accessToken })
+      .toPromise();
   }
 }

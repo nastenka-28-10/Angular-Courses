@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/modules/core/auth-service/auth.service';
-import * as uuid from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -11,13 +11,17 @@ export class LoginFormComponent implements OnInit {
   mail = '';
   password = '';
 
-  constructor(private auth: AuthService) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit() {}
 
-  onLogin() {
-    this.auth.login({ id: uuid.v4(), mail: this.mail, password: this.password });
-    console.log('logged in successfully');
+  async onLogin() {
+    try {
+      await this.auth.login({ login: this.mail, password: this.password });
+      this.router.navigate(['courses']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   get areDataValid(): boolean {
