@@ -12,11 +12,16 @@ export class CoursesDataService {
 
   private BASE_URL = `http://localhost:3004`;
 
-  getCoursesList(start?: number, count?: number, textFragment= ''): Promise<any> {
+  getCoursesList(start?: number, count?: number, textFragment = ''): Promise<any> {
     if (!start && !count) {
-      return this.http.get(`${this.BASE_URL}/courses`).toPromise();
+      return textFragment
+        ? this.http.get(`${this.BASE_URL}/courses?textFragment=${textFragment}`).toPromise()
+        : this.http.get(`${this.BASE_URL}/courses`).toPromise();
     }
-    return this.http.get(`${this.BASE_URL}/courses?start=${start}&count=${count}&textFragment=${textFragment}`).toPromise();
+
+    return this.http
+      .get(`${this.BASE_URL}/courses?start=${start}&count=${count}&textFragment=${textFragment}`)
+      .toPromise();
   }
 
   getCourseById(id: number): Promise<any> {

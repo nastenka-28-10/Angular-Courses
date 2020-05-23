@@ -29,15 +29,16 @@ export class CoursesListComponent implements OnInit, OnChanges {
     this.coursesDataService.getCoursesList().then((courses: CourseItemInterface[]) => {
       this.coursesNumber = courses.length;
     });
-    this.coursesDataService.getCoursesList(this.startForCoursesSearch, this.numberOfCoursesForLoading)
+    this.coursesDataService
+      .getCoursesList(this.startForCoursesSearch, this.numberOfCoursesForLoading)
       .then((coursesList) => {
         this.coursesList = coursesList;
         this.coursesListToShow = [...coursesList];
-    });
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.courseNameToSearch) {
+    if (changes.courseNameToSearch && !changes.courseNameToSearch.firstChange) {
       this.updateCoursesListToShow();
     }
   }
@@ -60,9 +61,14 @@ export class CoursesListComponent implements OnInit, OnChanges {
   onClickLoadMore(): void {
     this.startForCoursesSearch = this.coursesShownNumber;
     this.coursesShownNumber += this.numberOfCoursesForLoading;
-    this.coursesDataService.getCoursesList(this.startForCoursesSearch, this.numberOfCoursesForLoading, this.courseNameToSearch)
+    this.coursesDataService
+      .getCoursesList(
+        this.startForCoursesSearch,
+        this.numberOfCoursesForLoading,
+        this.courseNameToSearch,
+      )
       .then((coursesList) => {
-        //this.coursesList = coursesList;
+        // this.coursesList = coursesList;
         this.coursesListToShow = [...this.coursesListToShow, ...coursesList];
       });
   }
@@ -70,10 +76,18 @@ export class CoursesListComponent implements OnInit, OnChanges {
   updateCoursesListToShow() {
     this.startForCoursesSearch = 0;
     this.coursesShownNumber = 0;
-    this.coursesDataService.getCoursesList(this.startForCoursesSearch, this.numberOfCoursesForLoading, this.courseNameToSearch)
+    this.coursesDataService
+      .getCoursesList(0, 0, this.courseNameToSearch)
+      .then((courses: CourseItemInterface[]) => (this.coursesNumber = courses.length));
+    this.coursesDataService
+      .getCoursesList(
+        this.startForCoursesSearch,
+        this.numberOfCoursesForLoading,
+        this.courseNameToSearch,
+      )
       .then((coursesList: CourseItemInterface[]) => {
-        this.coursesListToShow = [...this.coursesListToShow, ...coursesList];
-        this.coursesShownNumber += this.numberOfCoursesForLoading;
-    });
+        this.coursesListToShow = coursesList;
+        this.coursesShownNumber = coursesList.length;
+      });
   }
 }

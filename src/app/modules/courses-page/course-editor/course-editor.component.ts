@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {CourseItemInterface} from 'app/interfaces/course-item-interface';
+import { CourseItemInterface } from 'app/interfaces/course-item-interface';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
 
