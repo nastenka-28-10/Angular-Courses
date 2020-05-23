@@ -7,8 +7,8 @@ module.exports = (server) => {
   router.get('/courses', (req, res, next) => {
     let url_parts = url.parse(req.originalUrl, true);
     const query = url_parts.query;
-    const from = query.start || 0;
-    let to = from + parseInt(query.count, 10);
+    const from = +query.start || 0;
+    let to = from + +parseInt(query.count, 10);
     const sort = query.sort;
     const id = query.id;
     let courses = server.db.getState().courses;

@@ -12,12 +12,14 @@ export class CoursesDataService {
 
   private BASE_URL = `http://localhost:3004`;
 
-  async getCoursesList(start?: number, count?: number): Promise<any> {
-    if (!start && !count) { return this.http.get(`${this.BASE_URL}/courses`).toPromise(); }
-    return this.http.get(`${this.BASE_URL}/courses?start=${start}&count=${count}`).toPromise();
+  getCoursesList(start?: number, count?: number, textFragment= ''): Promise<any> {
+    if (!start && !count) {
+      return this.http.get(`${this.BASE_URL}/courses`).toPromise();
+    }
+    return this.http.get(`${this.BASE_URL}/courses?start=${start}&count=${count}&textFragment=${textFragment}`).toPromise();
   }
 
-  async getCourseById(id: number): Promise<any> {
+  getCourseById(id: number): Promise<any> {
     return this.http.get(`${this.BASE_URL}/courses/${id}`).toPromise();
   }
 
