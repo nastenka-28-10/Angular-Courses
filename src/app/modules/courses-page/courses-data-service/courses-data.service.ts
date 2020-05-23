@@ -41,13 +41,7 @@ export class CoursesDataService {
     return courseToUpdate;
   }
 
-  async removeCourse(id: number): Promise<CourseItemInterface | number> {
-    const deletedCourse = await this.getCourseById(id);
-    const indexOfRemovedCourse = COURSES.indexOf(deletedCourse);
-    if (indexOfRemovedCourse !== -1) {
-      COURSES.splice(indexOfRemovedCourse, 1);
-      return deletedCourse;
-    }
-    return -1;
+  removeCourse(id: number): Promise<any> {
+    return this.http.delete(`${this.BASE_URL}/courses/${id}`).toPromise();
   }
 }

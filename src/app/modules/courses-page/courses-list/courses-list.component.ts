@@ -32,7 +32,6 @@ export class CoursesListComponent implements OnInit, OnChanges {
     this.coursesDataService
       .getCoursesList(this.startForCoursesSearch, this.numberOfCoursesForLoading)
       .then((coursesList) => {
-        this.coursesList = coursesList;
         this.coursesListToShow = [...coursesList];
       });
   }
@@ -50,10 +49,10 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   async onConfirmModalWindow() {
     await this.coursesDataService.removeCourse(this.courseToDelete.id);
-    this.updateCoursesListToShow();
+    this.updateCoursesListToShow(true);
   }
 
-  onCloseModalWindow() {
+  onCloseModalWindow(): void {
     this.isModalOpen = false;
     this.courseToDelete = null;
   }
@@ -68,26 +67,40 @@ export class CoursesListComponent implements OnInit, OnChanges {
         this.courseNameToSearch,
       )
       .then((coursesList) => {
-        // this.coursesList = coursesList;
         this.coursesListToShow = [...this.coursesListToShow, ...coursesList];
       });
   }
 
-  updateCoursesListToShow() {
-    this.startForCoursesSearch = 0;
-    this.coursesShownNumber = 0;
+  updateCoursesListToShow(isAfterCourseDelete = false): void {
     this.coursesDataService
       .getCoursesList(0, 0, this.courseNameToSearch)
       .then((courses: CourseItemInterface[]) => (this.coursesNumber = courses.length));
-    this.coursesDataService
-      .getCoursesList(
-        this.startForCoursesSearch,
-        this.numberOfCoursesForLoading,
-        this.courseNameToSearch,
-      )
-      .then((coursesList: CourseItemInterface[]) => {
-        this.coursesListToShow = coursesList;
-        this.coursesShownNumber = coursesList.length;
-      });
+    if (!isAfterCourseDelete) {
+      this.startForCoursesSearch = 0;
+      this.coursesShownNumber = 0;
+      this.coursesDataService
+        .getCoursesList(
+          this.startForCoursesSearch,
+          this.numberOfCoursesForLoading,
+          this.courseNameToSearch,
+        )
+        .then((coursesList: CourseItemInterface[]) => {
+          this.coursesListToShow = coursesList;
+          this.coursesShownNumber = coursesList.length;
+        });
+    } else {
+      this.coursesDataService
+        .getCoursesList(
+          0,
+          this.coursesShownNumber,
+          this.courseNameToSearch,
+        )
+        .then((coursesList: CourseItemInterface[]) => {
+          this.coursesListToShow = coursesList;
+          this.startForCoursesSearch = this.coursesShownNumber;
+          this.coursesShownNumber = coursesList.length;
+        });
+    }
+
   }
 }
