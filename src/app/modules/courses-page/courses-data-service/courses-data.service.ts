@@ -28,17 +28,12 @@ export class CoursesDataService {
     return this.http.get(`${this.BASE_URL}/courses/${id}`).toPromise();
   }
 
-  async createCourse(newCourse: CourseItemInterface): Promise<CourseItemInterface> {
-    COURSES.push(newCourse);
-    return newCourse;
+  createCourse(newCourse: CourseItemInterface): Promise<any> {
+    return this.http.post(`${this.BASE_URL}/courses`, newCourse).toPromise();
   }
 
-  async updateCourse(updatedCourse: CourseItemInterface): Promise<CourseItemInterface> {
-    const courseToUpdate = await this.getCourseById(+updatedCourse.id);
-    Object.keys(updatedCourse).forEach((key) => {
-      courseToUpdate[key] = updatedCourse[key];
-    });
-    return courseToUpdate;
+  updateCourse(updatedCourse: CourseItemInterface): Promise<any> {
+    return this.http.patch(`${this.BASE_URL}/courses/${updatedCourse.id}`, updatedCourse).toPromise();
   }
 
   removeCourse(id: number): Promise<any> {

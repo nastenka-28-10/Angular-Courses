@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CourseItemInterface } from 'app/interfaces/course-item-interface';
+import { CourseItemInterface, CourseAuthor } from 'app/interfaces/course-item-interface';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
 
@@ -30,35 +30,38 @@ export class CourseEditorComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
       this.routeParams.id = data.id;
-      this.coursesDataService.getCourseById(+this.routeParams.id).then((courseItem) => {
-        if (!courseItem) {
-          this.editorData.editorTitle = 'New course';
-        } else {
-          this.courseItem = courseItem;
-          this.editorData = {
-            editorTitle: 'Edit course',
-            courseTitle: `${this.courseItem.name}`,
-            courseDescription: `${this.courseItem.description}`,
-            courseDuration: `${this.courseItem.length}`,
-            courseDate: `${this.courseItem.date}`,
-            courseAuthors: `${this.courseItem.authors}`,
-          };
-        }
-      });
+      if (this.routeParams.id) {
+        this.coursesDataService.getCourseById(+this.routeParams.id).then((courseItem) => {
+            this.courseItem = courseItem;
+            this.editorData = {
+              editorTitle: 'Edit course',
+              courseTitle: `${this.courseItem.name}`,
+              courseDescription: `${this.courseItem.description}`,
+              courseDuration: `${this.courseItem.length}`,
+              courseDate: `${this.courseItem.date}`,
+              courseAuthors: this.courseItem.authors
+                .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
+                .join(', ')
+            };
+        }).catch(error => console.log(error));
+      } else {
+        this.editorData.editorTitle = 'New course';
+      }
     });
   }
 
   async onSaveCourse() {
     if (!this.courseItem) {
-      const coursesList = await this.coursesDataService.getCoursesList();
-      const newCourseId = Math.max(...coursesList.map((courseItem) => courseItem.id)) + 1;
+      const newCourseId = +('' + Math.random()).slice(2);
+      const courseAuthors = this.generateCourseAuthorsArray(this.editorData.courseAuthors);
+
       const newCourse: CourseItemInterface = {
         id: newCourseId,
         name: this.editorData.courseTitle,
         date: this.editorData.courseDate,
         length: +this.editorData.courseDuration,
         description: this.editorData.courseDescription,
-        authors: this.editorData.courseAuthors,
+        authors: courseAuthors,
         isTopRated: false,
       };
 
@@ -66,19 +69,47 @@ export class CourseEditorComponent implements OnInit {
 
       this.router.navigate(['courses']);
     } else {
+      const areCourseAuthorsNotChanged = this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
+
       const updatedCourse: CourseItemInterface = {
-        id: +this.routeParams.id,
+        id: this.courseItem.id,
         name: this.editorData.courseTitle,
         date: this.editorData.courseDate,
         length: +this.editorData.courseDuration,
         description: this.editorData.courseDescription,
         isTopRated: this.courseItem.isTopRated,
-        authors: this.editorData.courseAuthors,
+        authors: areCourseAuthorsNotChanged ? this.courseItem.authors : this.generateCourseAuthorsArray(this.editorData.courseAuthors)
       };
 
       await this.coursesDataService.updateCourse(updatedCourse);
 
       this.router.navigate(['courses']);
     }
+  }
+
+  private getCourseAuthorsStringView(authors: CourseAuthor[]): string {
+    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
+      .join(', ');
+  }
+
+  private generateCourseAuthorsArray(authorsStringView: string): CourseAuthor[] {
+    if (authorsStringView.includes(',')) {
+      return authorsStringView.split(',')
+        .map((author: string) => author.replace(/^\s*(.*)\s*$/, '$1'))
+        .map((author: string) => {
+          const [name, lastName] = author.split(' ');
+          return {
+            id: +('' + Math.random()).slice(2),
+            name,
+            lastName
+          };
+        });
+    }
+    const [name, lastName] = authorsStringView.split(' ');
+    return [{
+      id: +('' + Math.random()).slice(2),
+      name,
+      lastName
+    }];
   }
 }
