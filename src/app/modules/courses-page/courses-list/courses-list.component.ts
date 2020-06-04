@@ -15,6 +15,10 @@ export class CoursesListComponent implements OnInit, OnChanges {
   coursesListToShow: CourseItemInterface[] = [];
   courseToDelete: CourseItemInterface | null;
   isModalOpen = false;
+  coursesNumber: number;
+  coursesShownNumber = 5;
+  numberOfCoursesForLoading = 5;
+  startForCoursesSearch = 0;
 
   constructor(
     private filterByCourseNamePipe: FilterByCourseNamePipe,
@@ -22,14 +26,18 @@ export class CoursesListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.coursesDataService.getCoursesList().then((coursesList) => {
-      this.coursesList = coursesList;
-      this.coursesListToShow = [...this.coursesList];
+    this.coursesDataService.getCoursesList().then((courses: CourseItemInterface[]) => {
+      this.coursesNumber = courses.length;
     });
+    this.coursesDataService
+      .getCoursesList(this.startForCoursesSearch, this.numberOfCoursesForLoading)
+      .then((coursesList) => {
+        this.coursesListToShow = [...coursesList];
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.courseNameToSearch) {
+    if (changes.courseNameToSearch && !changes.courseNameToSearch.firstChange) {
       this.updateCoursesListToShow();
     }
   }
@@ -41,22 +49,58 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   async onConfirmModalWindow() {
     await this.coursesDataService.removeCourse(this.courseToDelete.id);
-    this.updateCoursesListToShow();
+    this.updateCoursesListToShow(true);
   }
 
-  onCloseModalWindow() {
+  onCloseModalWindow(): void {
     this.isModalOpen = false;
     this.courseToDelete = null;
   }
 
   onClickLoadMore(): void {
-    console.log('Load more button pressed');
+    this.startForCoursesSearch = this.coursesShownNumber;
+    this.coursesShownNumber += this.numberOfCoursesForLoading;
+    this.coursesDataService
+      .getCoursesList(
+        this.startForCoursesSearch,
+        this.numberOfCoursesForLoading,
+        this.courseNameToSearch,
+      )
+      .then((coursesList) => {
+        this.coursesListToShow = [...this.coursesListToShow, ...coursesList];
+      });
   }
 
-  updateCoursesListToShow() {
-    this.coursesListToShow = this.filterByCourseNamePipe.transform(
-      this.coursesList,
-      this.courseNameToSearch,
-    );
+  updateCoursesListToShow(isAfterCourseDelete = false): void {
+    this.coursesDataService
+      .getCoursesList(0, 0, this.courseNameToSearch)
+      .then((courses: CourseItemInterface[]) => (this.coursesNumber = courses.length));
+    if (!isAfterCourseDelete) {
+      this.startForCoursesSearch = 0;
+      this.coursesShownNumber = 0;
+      this.coursesDataService
+        .getCoursesList(
+          this.startForCoursesSearch,
+          this.numberOfCoursesForLoading,
+          this.courseNameToSearch,
+        )
+        .then((coursesList: CourseItemInterface[]) => {
+          this.coursesListToShow = coursesList;
+          this.coursesShownNumber = coursesList.length;
+        });
+    } else {
+      this.coursesDataService
+        .getCoursesList(
+          0,
+          this.coursesShownNumber,
+          this.courseNameToSearch,
+        )
+        .then((coursesList: CourseItemInterface[]) => {
+          this.coursesListToShow = coursesList;
+          this.startForCoursesSearch = this.coursesShownNumber;
+          this.coursesShownNumber = coursesList.length;
+        });
+    }
+
   }
 }

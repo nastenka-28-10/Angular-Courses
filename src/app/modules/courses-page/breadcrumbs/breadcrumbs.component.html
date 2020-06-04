@@ -5,12 +5,12 @@
        [routerLinkActiveOptions]="{exact:true}">
     Courses
   </div>
-  <div class="courses-breadcrumbs__element"
+  <div class="courses-breadcrumbs__element course-name"
        *ngIf="courseItem"
        [routerLink]="['/courses', courseItem.id]"
        [routerLinkActive]="'courses-breadcrumbs__element--active not-clickable'"
        [routerLinkActiveOptions]="{exact:true}">
-    {{courseItem.title}}
+    {{courseItem.name}}
   </div>
 
   <div class="courses-breadcrumbs__element"

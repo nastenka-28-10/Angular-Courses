@@ -4,10 +4,10 @@
     <div class="add-course-text">Add course</div>
   </button>
   <div class="courses-list-wrapper" *ngIf="coursesListToShow.length">
-    <app-course-item *ngFor="let item of coursesListToShow | orderBy"
+    <app-course-item *ngFor="let item of coursesListToShow"
                      [courseItem]="item"
                      (deleteCourse)="onClickDeleteCourse($event)"></app-course-item>
-    <div class="courses-list__load-more">
+    <div class="courses-list__load-more" *ngIf="coursesShownNumber < coursesNumber">
       <button class="load-more-button" (click)="onClickLoadMore()">Load more</button>
     </div>
   </div>
@@ -16,7 +16,7 @@
   </div>
   <app-confirm-modal *ngIf="isModalOpen"
                      [modalHeader]="'Delete course?'"
-                     [modalQuestion]="'Are you sure you want to delete ' + courseToDelete.title + '?'"
+                     [modalQuestion]="'Are you sure you want to delete ' + courseToDelete.name + '?'"
                      [confirmMessage]="'Yes, delete'"
                      [cancelMessage]="'Cancel'"
                      (closed)="onCloseModalWindow()"

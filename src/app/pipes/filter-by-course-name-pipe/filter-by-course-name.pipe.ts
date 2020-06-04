@@ -8,7 +8,7 @@ export class FilterByCourseNamePipe implements PipeTransform {
   transform(courses: CourseItemInterface[], courseNameToSearch: string): CourseItemInterface[] {
     if (courseNameToSearch) {
       return courses.filter((item) =>
-        item.title.toLowerCase().includes(courseNameToSearch.toLowerCase()),
+        item.name.toLowerCase().includes(courseNameToSearch.toLowerCase()),
       );
     }
     return courses;
