@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { map, debounceTime, filter } from 'rxjs/operators';
 
 @Component({
@@ -14,10 +14,12 @@ export class SearchCourseComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.inputChange.pipe(
-      debounceTime(300),
-      map((target: HTMLInputElement): string => target.value),
-      filter((inputValue: string): boolean => !inputValue || inputValue.length >= 3)
-    ).subscribe((value: string) => this.searchCourse.emit(value));
+    this.inputChange
+      .pipe(
+        debounceTime(300),
+        map((target: HTMLInputElement): string => target.value),
+        filter((inputValue: string): boolean => !inputValue || inputValue.length >= 3),
+      )
+      .subscribe((value: string) => this.searchCourse.emit(value));
   }
 }

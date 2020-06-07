@@ -8,6 +8,7 @@
       <div class="login-wrapper__icon"></div>
       <div class="login-logoff-text">User login</div>
     </a>
+    <span class="header__user-info" *ngIf="isAuthenticated">{{userInfo}}</span>
     <a class="logoff-wrapper" *ngIf="isAuthenticated" (click)="onLogOff()" [routerLink]="['/login']">
       <div class="logoff-wrapper__icon"></div>
       <div class="login-logoff-text">Log off</div>

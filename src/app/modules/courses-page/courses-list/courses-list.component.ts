@@ -90,17 +90,12 @@ export class CoursesListComponent implements OnInit, OnChanges {
         });
     } else {
       this.coursesDataService
-        .getCoursesList(
-          0,
-          this.coursesShownNumber,
-          this.courseNameToSearch,
-        )
+        .getCoursesList(0, this.coursesShownNumber, this.courseNameToSearch)
         .then((coursesList: CourseItemInterface[]) => {
           this.coursesListToShow = coursesList;
           this.startForCoursesSearch = this.coursesShownNumber;
           this.coursesShownNumber = coursesList.length;
         });
     }
-
   }
 }

@@ -33,7 +33,9 @@ export class CoursesDataService {
   }
 
   updateCourse(updatedCourse: CourseItemInterface): Promise<any> {
-    return this.http.patch(`${this.BASE_URL}/courses/${updatedCourse.id}`, updatedCourse).toPromise();
+    return this.http
+      .patch(`${this.BASE_URL}/courses/${updatedCourse.id}`, updatedCourse)
+      .toPromise();
   }
 
   removeCourse(id: number): Promise<any> {

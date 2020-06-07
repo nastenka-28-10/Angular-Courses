@@ -31,7 +31,9 @@ export class CourseEditorComponent implements OnInit {
     this.route.params.subscribe((data) => {
       this.routeParams.id = data.id;
       if (this.routeParams.id) {
-        this.coursesDataService.getCourseById(+this.routeParams.id).then((courseItem) => {
+        this.coursesDataService
+          .getCourseById(+this.routeParams.id)
+          .then((courseItem) => {
             this.courseItem = courseItem;
             this.editorData = {
               editorTitle: 'Edit course',
@@ -41,9 +43,10 @@ export class CourseEditorComponent implements OnInit {
               courseDate: `${this.courseItem.date}`,
               courseAuthors: this.courseItem.authors
                 .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
-                .join(', ')
+                .join(', '),
             };
-        }).catch(error => console.log(error));
+          })
+          .catch((error) => console.log(error));
       } else {
         this.editorData.editorTitle = 'New course';
       }
@@ -69,7 +72,8 @@ export class CourseEditorComponent implements OnInit {
 
       this.router.navigate(['courses']);
     } else {
-      const areCourseAuthorsNotChanged = this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
+      const areCourseAuthorsNotChanged =
+        this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
 
       const updatedCourse: CourseItemInterface = {
         id: this.courseItem.id,
@@ -78,7 +82,9 @@ export class CourseEditorComponent implements OnInit {
         length: +this.editorData.courseDuration,
         description: this.editorData.courseDescription,
         isTopRated: this.courseItem.isTopRated,
-        authors: areCourseAuthorsNotChanged ? this.courseItem.authors : this.generateCourseAuthorsArray(this.editorData.courseAuthors)
+        authors: areCourseAuthorsNotChanged
+          ? this.courseItem.authors
+          : this.generateCourseAuthorsArray(this.editorData.courseAuthors),
       };
 
       await this.coursesDataService.updateCourse(updatedCourse);
@@ -88,28 +94,30 @@ export class CourseEditorComponent implements OnInit {
   }
 
   private getCourseAuthorsStringView(authors: CourseAuthor[]): string {
-    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
-      .join(', ');
+    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`).join(', ');
   }
 
   private generateCourseAuthorsArray(authorsStringView: string): CourseAuthor[] {
     if (authorsStringView.includes(',')) {
-      return authorsStringView.split(',')
+      return authorsStringView
+        .split(',')
         .map((author: string) => author.replace(/^\s*(.*)\s*$/, '$1'))
         .map((author: string) => {
           const [name, lastName] = author.split(' ');
           return {
             id: +('' + Math.random()).slice(2),
             name,
-            lastName
+            lastName,
           };
         });
     }
     const [name, lastName] = authorsStringView.split(' ');
-    return [{
-      id: +('' + Math.random()).slice(2),
-      name,
-      lastName
-    }];
+    return [
+      {
+        id: +('' + Math.random()).slice(2),
+        name,
+        lastName,
+      },
+    ];
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthData, UserInfo, UserInterface } from 'app/interfaces/user-interface';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,10 +32,8 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo(): Promise<UserInfo> {
+  getUserInfo(): Observable<UserInfo> {
     const accessToken = localStorage.getItem('accessToken');
-    return this.http
-      .post<UserInfo>(`${this.BASE_URL}/auth/userinfo`, { token: accessToken })
-      .toPromise();
+    return this.http.post<UserInfo>(`${this.BASE_URL}/auth/userinfo`, { token: accessToken });
   }
 }
