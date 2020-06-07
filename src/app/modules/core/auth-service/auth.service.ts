@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { AuthData, UserInfo, UserInterface } from 'app/interfaces/user-interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {LoadingSpinnerServiceService} from 'app/modules/core/loading-spinner-service.service';
+import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private loadingSpinnerService: LoadingSpinnerServiceService) {}
+  constructor(
+    private http: HttpClient,
+    private loadingSpinnerService: LoadingSpinnerServiceService,
+  ) {}
 
   private BASE_URL = `http://localhost:3004`;
 

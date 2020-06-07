@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoadingSpinnerServiceService {
-  constructor() { }
+  constructor() {}
 
   public status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

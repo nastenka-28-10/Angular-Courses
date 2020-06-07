@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/modules/core/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { AuthData } from 'app/interfaces/user-interface';
-import {LoadingSpinnerServiceService} from 'app/modules/core/loading-spinner-service.service';
-import {HttpErrorResponse} from '@angular/common/http';
+import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -17,17 +17,20 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private loadingSpinnerService: LoadingSpinnerServiceService
+    private loadingSpinnerService: LoadingSpinnerServiceService,
   ) {}
 
   ngOnInit() {}
 
   onLogin() {
-    this.auth.login({ login: this.mail, password: this.password }).subscribe((res: AuthData) => {
-      this.loadingSpinnerService.display(false);
-      localStorage.setItem('accessToken', res.token);
-      this.router.navigate(['courses']);
-    }, (error: HttpErrorResponse) => console.log(error));
+    this.auth.login({ login: this.mail, password: this.password }).subscribe(
+      (res: AuthData) => {
+        this.loadingSpinnerService.display(false);
+        localStorage.setItem('accessToken', res.token);
+        this.router.navigate(['courses']);
+      },
+      (error: HttpErrorResponse) => console.log(error),
+    );
   }
 
   get areDataValid(): boolean {

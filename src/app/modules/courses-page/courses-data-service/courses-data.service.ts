@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CourseItemInterface } from 'app/interfaces/course-item-interface';
 import { HttpClient } from '@angular/common/http';
-import {LoadingSpinnerServiceService} from 'app/modules/core/loading-spinner-service.service';
-import {Observable} from 'rxjs';
+import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesDataService {
-  constructor(private http: HttpClient, private loadingSpinnerService: LoadingSpinnerServiceService) {}
+  constructor(
+    private http: HttpClient,
+    private loadingSpinnerService: LoadingSpinnerServiceService,
+  ) {}
 
   private BASE_URL = `http://localhost:3004`;
 
@@ -21,8 +24,9 @@ export class CoursesDataService {
         : this.http.get(`${this.BASE_URL}/courses`);
     }
 
-    return this.http
-      .get(`${this.BASE_URL}/courses?start=${start}&count=${count}&textFragment=${textFragment}`);
+    return this.http.get(
+      `${this.BASE_URL}/courses?start=${start}&count=${count}&textFragment=${textFragment}`,
+    );
   }
 
   getCourseById(id: number): Observable<any> {

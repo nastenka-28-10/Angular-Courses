@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseItemInterface, CourseAuthor } from 'app/interfaces/course-item-interface';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
-import {LoadingSpinnerServiceService} from 'app/modules/core/loading-spinner-service.service';
-import {HttpErrorResponse} from '@angular/common/http';
+import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-course-editor',
@@ -27,16 +27,15 @@ export class CourseEditorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private coursesDataService: CoursesDataService,
-    private loadingSpinnerService: LoadingSpinnerServiceService
+    private loadingSpinnerService: LoadingSpinnerServiceService,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
       this.routeParams.id = data.id;
       if (this.routeParams.id) {
-        this.coursesDataService
-          .getCourseById(+this.routeParams.id)
-          .subscribe((courseItem) => {
+        this.coursesDataService.getCourseById(+this.routeParams.id).subscribe(
+          (courseItem) => {
             this.loadingSpinnerService.display(false);
             this.courseItem = courseItem;
             this.editorData = {
@@ -49,7 +48,9 @@ export class CourseEditorComponent implements OnInit {
                 .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
                 .join(', '),
             };
-          }, (error: HttpErrorResponse) => console.log(error));
+          },
+          (error: HttpErrorResponse) => console.log(error),
+        );
       } else {
         this.editorData.editorTitle = 'New course';
       }
