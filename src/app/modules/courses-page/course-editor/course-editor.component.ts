@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseItemInterface, CourseAuthor } from 'app/interfaces/course-item-interface';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
+import {LoadingSpinnerServiceService} from 'app/modules/core/loading-spinner-service.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-course-editor',
@@ -25,6 +27,7 @@ export class CourseEditorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private coursesDataService: CoursesDataService,
+    private loadingSpinnerService: LoadingSpinnerServiceService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +36,8 @@ export class CourseEditorComponent implements OnInit {
       if (this.routeParams.id) {
         this.coursesDataService
           .getCourseById(+this.routeParams.id)
-          .then((courseItem) => {
+          .subscribe((courseItem) => {
+            this.loadingSpinnerService.display(false);
             this.courseItem = courseItem;
             this.editorData = {
               editorTitle: 'Edit course',
@@ -45,8 +49,7 @@ export class CourseEditorComponent implements OnInit {
                 .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
                 .join(', '),
             };
-          })
-          .catch((error) => console.log(error));
+          }, (error: HttpErrorResponse) => console.log(error));
       } else {
         this.editorData.editorTitle = 'New course';
       }
@@ -68,9 +71,10 @@ export class CourseEditorComponent implements OnInit {
         isTopRated: false,
       };
 
-      await this.coursesDataService.createCourse(newCourse);
-
-      this.router.navigate(['courses']);
+      this.coursesDataService.createCourse(newCourse).subscribe(() => {
+        this.loadingSpinnerService.display(false);
+        this.router.navigate(['courses']);
+      });
     } else {
       const areCourseAuthorsNotChanged =
         this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
@@ -87,9 +91,10 @@ export class CourseEditorComponent implements OnInit {
           : this.generateCourseAuthorsArray(this.editorData.courseAuthors),
       };
 
-      await this.coursesDataService.updateCourse(updatedCourse);
-
-      this.router.navigate(['courses']);
+      this.coursesDataService.updateCourse(updatedCourse).subscribe(() => {
+        this.loadingSpinnerService.display(false);
+        this.router.navigate(['courses']);
+      });
     }
   }
 
