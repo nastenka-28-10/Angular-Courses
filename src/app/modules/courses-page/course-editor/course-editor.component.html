@@ -1,82 +1,84 @@
 <div class="course-editor">
-  <h2 class="course-editor__title">{{editorData.editorTitle}}</h2>
-  <div class="course-editor__form-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Title:
+  <form [formGroup]="coursesEditor" (ngSubmit)="onSaveCourse()">
+    <h2 class="course-editor__title">{{editorData.editorTitle}}</h2>
+    <div class="course-editor__form-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Title:
+        </div>
+        <div class="element-caption__required">
+          required
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <input type="text"
+             class="element-input title-input"
+             placeholder="Text input"
+             formControlName="title">
     </div>
-    <input type="text"
-           class="element-input title-input"
-           placeholder="Text input"
-           [(ngModel)]="editorData.courseTitle">
-  </div>
 
-  <div class="course-editor__form-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Description:
+    <div class="course-editor__form-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Description:
+        </div>
+        <div class="element-caption__required">
+          required
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <textarea type="text"
+                class="element-input description-input"
+                placeholder="Add description"
+                formControlName="description"></textarea>
     </div>
-    <textarea type="text"
-              class="element-input description-input"
-              placeholder="Add description"
-              [(ngModel)]="editorData.courseDescription"></textarea>
-  </div>
 
-  <div class="course-editor__form-element duration-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Duration:
+    <div class="course-editor__form-element duration-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Duration:
+        </div>
+        <div class="element-caption__required">
+          required
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <input type="text"
+             class="element-input duration-element__input"
+             placeholder="minutes"
+             formControlName="duration">
     </div>
-    <input type="text"
-           class="element-input duration-element__input"
-           placeholder="minutes"
-           [(ngModel)]="editorData.courseDuration">
-  </div>
 
-  <div class="course-editor__form-element date-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Date:
+    <div class="course-editor__form-element date-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Date:
+        </div>
+        <div class="element-caption__required">
+          required
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <input type="text"
+             class="element-input date-element__input"
+             placeholder="mm-dd-yyyy"
+             formControlName="date">
     </div>
-    <input type="text"
-           class="element-input date-element__input"
-           placeholder="mm-dd-yyyy"
-           [(ngModel)]="editorData.courseDate">
-  </div>
 
-  <div class="course-editor__form-element authors-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Authors:
+    <div class="course-editor__form-element authors-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Authors:
+        </div>
+        <div class="element-caption__required">
+          required
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <input type="text"
+             class="element-input authors-element__input"
+             placeholder="Start typing"
+             formControlName="authors">
     </div>
-    <input type="text"
-           class="element-input authors-element__input"
-           placeholder="Start typing"
-           [(ngModel)]="editorData.courseAuthors">
-  </div>
 
-  <div class="course-editor__action-buttons">
-    <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>
-    <button class="save-course" (click)="onSaveCourse()">Save</button>
-  </div>
+    <div class="course-editor__action-buttons">
+      <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>
+      <button type="submit" class="save-course">Save</button>
+    </div>
+  </form>
 </div>

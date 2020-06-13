@@ -5,6 +5,7 @@ import { CoursesDataService } from 'app/modules/courses-page/courses-data-servic
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
 import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-course-editor',
@@ -13,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CourseEditorComponent implements OnInit {
   public routeParams: any = {};
+  public coursesEditor: any = {};
   public courseItem: CourseItemInterface | null = null;
   public editorData: EditorDataInterface = {
     editorTitle: '',
@@ -28,7 +30,15 @@ export class CourseEditorComponent implements OnInit {
     private route: ActivatedRoute,
     private coursesDataService: CoursesDataService,
     private loadingSpinnerService: LoadingSpinnerServiceService,
-  ) {}
+  ) {
+    this.coursesEditor = new FormGroup({
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      duration: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+      authors: new FormControl('', Validators.required),
+    });
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
@@ -48,6 +58,12 @@ export class CourseEditorComponent implements OnInit {
                 .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
                 .join(', '),
             };
+
+            this.coursesEditor.controls.title.setValue(this.editorData.courseTitle);
+            this.coursesEditor.controls.description.setValue(this.editorData.courseDescription);
+            this.coursesEditor.controls.duration.setValue(this.editorData.courseDuration);
+            this.coursesEditor.controls.date.setValue(this.editorData.courseDate);
+            this.coursesEditor.controls.authors.setValue(this.editorData.courseAuthors);
           },
           (error: HttpErrorResponse) => console.log(error),
         );
@@ -60,14 +76,14 @@ export class CourseEditorComponent implements OnInit {
   async onSaveCourse() {
     if (!this.courseItem) {
       const newCourseId = +('' + Math.random()).slice(2);
-      const courseAuthors = this.generateCourseAuthorsArray(this.editorData.courseAuthors);
+      const courseAuthors = this.generateCourseAuthorsArray(this.coursesEditor.value.authors);
 
       const newCourse: CourseItemInterface = {
         id: newCourseId,
-        name: this.editorData.courseTitle,
-        date: this.editorData.courseDate,
-        length: +this.editorData.courseDuration,
-        description: this.editorData.courseDescription,
+        name: this.coursesEditor.value.title,
+        date: this.coursesEditor.value.date,
+        length: +this.coursesEditor.value.duration,
+        description: this.coursesEditor.value.description,
         authors: courseAuthors,
         isTopRated: false,
       };
@@ -78,18 +94,18 @@ export class CourseEditorComponent implements OnInit {
       });
     } else {
       const areCourseAuthorsNotChanged =
-        this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
+        this.getCourseAuthorsStringView(this.courseItem.authors) === this.coursesEditor.value.authors;
 
       const updatedCourse: CourseItemInterface = {
         id: this.courseItem.id,
-        name: this.editorData.courseTitle,
-        date: this.editorData.courseDate,
-        length: +this.editorData.courseDuration,
-        description: this.editorData.courseDescription,
+        name: this.coursesEditor.value.title,
+        date: this.coursesEditor.value.date,
+        length: +this.coursesEditor.value.duration,
+        description: this.coursesEditor.value.description,
         isTopRated: this.courseItem.isTopRated,
         authors: areCourseAuthorsNotChanged
           ? this.courseItem.authors
-          : this.generateCourseAuthorsArray(this.editorData.courseAuthors),
+          : this.generateCourseAuthorsArray(this.coursesEditor.value.authors),
       };
 
       this.coursesDataService.updateCourse(updatedCourse).subscribe(() => {
