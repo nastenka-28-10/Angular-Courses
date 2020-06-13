@@ -41,14 +41,14 @@
         color: $slate-grey;
       }
 
-      &__required {
+      &__error-notifier {
         position: relative;
         font-family: Source Sans Pro;
         font-size: 12px;
         line-height: 1.5;
         letter-spacing: 0.19px;
         text-align: right;
-        color: $battleship-grey;
+        color: $red;
 
         &::before {
           position: absolute;
@@ -116,6 +116,15 @@
       line-height: 2.43;
       letter-spacing: -0.1px;
       cursor: pointer;
+
+      &:disabled {
+        background-color: $pale-grey;
+        color: $cool-grey;
+        cursor: not-allowed;
+      }
+      &:disabled:hover {
+        background-color: $pale-grey;
+      }
     }
 
     .cancel-course {

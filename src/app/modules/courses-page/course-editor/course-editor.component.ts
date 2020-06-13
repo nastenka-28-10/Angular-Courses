@@ -5,7 +5,7 @@ import { CoursesDataService } from 'app/modules/courses-page/courses-data-servic
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
 import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-editor',
@@ -32,8 +32,8 @@ export class CourseEditorComponent implements OnInit {
     private loadingSpinnerService: LoadingSpinnerServiceService,
   ) {
     this.coursesEditor = new FormGroup({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
+      title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
       duration: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       authors: new FormControl('', Validators.required),
@@ -94,7 +94,8 @@ export class CourseEditorComponent implements OnInit {
       });
     } else {
       const areCourseAuthorsNotChanged =
-        this.getCourseAuthorsStringView(this.courseItem.authors) === this.coursesEditor.value.authors;
+        this.getCourseAuthorsStringView(this.courseItem.authors) ===
+        this.coursesEditor.value.authors;
 
       const updatedCourse: CourseItemInterface = {
         id: this.courseItem.id,

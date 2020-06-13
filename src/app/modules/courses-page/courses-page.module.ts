@@ -6,7 +6,7 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesContainerComponent } from './courses-container/courses-container.component';
 import { CourseBorderDirective } from './course-border/course-border.directive';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'app/modules/core/core.module';
 import { OrderByPipe } from 'app/pipes/order-by-pipe/order-by.pipe';
 import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
@@ -28,7 +28,7 @@ import { CoursesContentComponent } from 'app/modules/courses-page/courses-conten
     CoursesContentComponent,
     CoursesContentComponent,
   ],
-    imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule, ReactiveFormsModule],
   exports: [CoursesContainerComponent, CourseEditorComponent, CoursesContentComponent],
 })
 export class CoursesPageModule {}
