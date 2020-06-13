@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -11,7 +13,11 @@ export class BreadcrumbsComponent implements OnInit {
   public courseItem = null;
   public newCourseModeTitleForBreadcrumbs: string | null = null;
 
-  constructor(private router: Router, private coursesDataService: CoursesDataService) {}
+  constructor(
+    private router: Router,
+    private coursesDataService: CoursesDataService,
+    private loadingSpinnerService: LoadingSpinnerServiceService,
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -22,9 +28,13 @@ export class BreadcrumbsComponent implements OnInit {
           const secondUrlPart = urlParts[1];
           if (!isNaN(+secondUrlPart) && typeof +secondUrlPart === 'number') {
             this.newCourseModeTitleForBreadcrumbs = null;
-            this.coursesDataService.getCourseById(+secondUrlPart).then((courseItem) => {
-              this.courseItem = courseItem ? courseItem : null;
-            });
+            this.coursesDataService.getCourseById(+secondUrlPart).subscribe(
+              (courseItem) => {
+                this.loadingSpinnerService.display(false);
+                this.courseItem = courseItem ? courseItem : null;
+              },
+              (error: HttpErrorResponse) => console.log(error),
+            );
           } else if (secondUrlPart === 'new') {
             this.courseItem = null;
             this.newCourseModeTitleForBreadcrumbs = 'New course';

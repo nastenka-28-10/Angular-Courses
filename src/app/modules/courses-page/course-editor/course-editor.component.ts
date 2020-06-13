@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseItemInterface, CourseAuthor } from 'app/interfaces/course-item-interface';
 import { CoursesDataService } from 'app/modules/courses-page/courses-data-service/courses-data.service';
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
+import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-course-editor',
@@ -25,13 +27,16 @@ export class CourseEditorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private coursesDataService: CoursesDataService,
+    private loadingSpinnerService: LoadingSpinnerServiceService,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
       this.routeParams.id = data.id;
       if (this.routeParams.id) {
-        this.coursesDataService.getCourseById(+this.routeParams.id).then((courseItem) => {
+        this.coursesDataService.getCourseById(+this.routeParams.id).subscribe(
+          (courseItem) => {
+            this.loadingSpinnerService.display(false);
             this.courseItem = courseItem;
             this.editorData = {
               editorTitle: 'Edit course',
@@ -41,9 +46,11 @@ export class CourseEditorComponent implements OnInit {
               courseDate: `${this.courseItem.date}`,
               courseAuthors: this.courseItem.authors
                 .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
-                .join(', ')
+                .join(', '),
             };
-        }).catch(error => console.log(error));
+          },
+          (error: HttpErrorResponse) => console.log(error),
+        );
       } else {
         this.editorData.editorTitle = 'New course';
       }
@@ -65,11 +72,13 @@ export class CourseEditorComponent implements OnInit {
         isTopRated: false,
       };
 
-      await this.coursesDataService.createCourse(newCourse);
-
-      this.router.navigate(['courses']);
+      this.coursesDataService.createCourse(newCourse).subscribe(() => {
+        this.loadingSpinnerService.display(false);
+        this.router.navigate(['courses']);
+      });
     } else {
-      const areCourseAuthorsNotChanged = this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
+      const areCourseAuthorsNotChanged =
+        this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
 
       const updatedCourse: CourseItemInterface = {
         id: this.courseItem.id,
@@ -78,38 +87,43 @@ export class CourseEditorComponent implements OnInit {
         length: +this.editorData.courseDuration,
         description: this.editorData.courseDescription,
         isTopRated: this.courseItem.isTopRated,
-        authors: areCourseAuthorsNotChanged ? this.courseItem.authors : this.generateCourseAuthorsArray(this.editorData.courseAuthors)
+        authors: areCourseAuthorsNotChanged
+          ? this.courseItem.authors
+          : this.generateCourseAuthorsArray(this.editorData.courseAuthors),
       };
 
-      await this.coursesDataService.updateCourse(updatedCourse);
-
-      this.router.navigate(['courses']);
+      this.coursesDataService.updateCourse(updatedCourse).subscribe(() => {
+        this.loadingSpinnerService.display(false);
+        this.router.navigate(['courses']);
+      });
     }
   }
 
   private getCourseAuthorsStringView(authors: CourseAuthor[]): string {
-    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
-      .join(', ');
+    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`).join(', ');
   }
 
   private generateCourseAuthorsArray(authorsStringView: string): CourseAuthor[] {
     if (authorsStringView.includes(',')) {
-      return authorsStringView.split(',')
+      return authorsStringView
+        .split(',')
         .map((author: string) => author.replace(/^\s*(.*)\s*$/, '$1'))
         .map((author: string) => {
           const [name, lastName] = author.split(' ');
           return {
             id: +('' + Math.random()).slice(2),
             name,
-            lastName
+            lastName,
           };
         });
     }
     const [name, lastName] = authorsStringView.split(' ');
-    return [{
-      id: +('' + Math.random()).slice(2),
-      name,
-      lastName
-    }];
+    return [
+      {
+        id: +('' + Math.random()).slice(2),
+        name,
+        lastName,
+      },
+    ];
   }
 }

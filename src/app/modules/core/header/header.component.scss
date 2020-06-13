@@ -6,6 +6,15 @@
   padding: 0 39px 0 85px;
   background-color: $charcoal-grey;
 
+  &__user-info {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-family: Oswald;
+    color: $white;
+  }
+
   &__logo-btn {
     display: flex;
     align-items: center;

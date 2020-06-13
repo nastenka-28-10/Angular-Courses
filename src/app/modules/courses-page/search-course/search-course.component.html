@@ -1,7 +1,6 @@
 <div class="search-container">
   <div class="search-container__wrapper">
     <div class="search-container__icon"></div>
-    <input [(ngModel)]="courseNameToSearch" type="text" class="search-container__input" placeholder="Text to search">
+    <input (keyup)="inputChange.next($event.target)" type="text" class="search-container__input" placeholder="Text to search">
   </div>
-  <button class="search-container__button" (click)="onClickSearch()"> Search</button>
 </div>
