@@ -120,7 +120,7 @@ export class CourseEditorComponent implements OnInit {
     const [name, lastName] = authorsStringView.split(' ');
     return [
       {
-        id: +('' + Math.random()).slice(2),
+        id: +`${Math.random()}`.slice(2),
         name,
         lastName,
       },
