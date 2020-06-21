@@ -41,37 +41,9 @@
                 formControlName="description"></textarea>
     </div>
 
-    <div class="course-editor__form-element duration-element">
-      <div class="element-caption">
-        <div class="element-caption__title">
-          Duration:
-        </div>
-        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.duration.errors &&
-         coursesEditor.controls.duration.errors.required">
-          required
-        </div>
-      </div>
-      <input type="text"
-             class="element-input duration-element__input"
-             placeholder="minutes"
-             formControlName="duration">
-    </div>
+    <app-duration-input [formControlName]="'duration'" [validationErrors]="coursesEditor.controls.duration.errors"></app-duration-input>
 
-    <div class="course-editor__form-element date-element">
-      <div class="element-caption">
-        <div class="element-caption__title">
-          Date:
-        </div>
-        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.date.errors &&
-         coursesEditor.controls.date.errors.required">
-          required
-        </div>
-      </div>
-      <input type="text"
-             class="element-input date-element__input"
-             placeholder="mm-dd-yyyy"
-             formControlName="date">
-    </div>
+    <app-date-input [formControlName]="'date'" [validationErrors]="coursesEditor.controls.date.errors"></app-date-input>
 
     <div class="course-editor__form-element authors-element">
       <div class="element-caption">

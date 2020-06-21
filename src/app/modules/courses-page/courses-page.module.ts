@@ -13,6 +13,10 @@ import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/fil
 import { CourseEditorComponent } from 'app/modules/courses-page/course-editor/course-editor.component';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { CoursesContentComponent } from 'app/modules/courses-page/courses-content/courses-content.component';
+import { DateInputComponent } from 'app/modules/courses-page/date-input/date-input.component';
+import { ValidateDateDirective } from 'app/modules/courses-page/validate-date/validate-date.directive';
+import { DurationInputComponent } from 'app/modules/courses-page/duration-input/duration-input.component';
+import { ValidateDurationDirective } from 'app/modules/courses-page/validate-duration/validate-duration.directive';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { CoursesContentComponent } from 'app/modules/courses-page/courses-conten
     CourseEditorComponent,
     CoursesContentComponent,
     CoursesContentComponent,
+    DateInputComponent,
+    ValidateDateDirective,
+    DurationInputComponent,
+    ValidateDurationDirective,
   ],
   imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule, ReactiveFormsModule],
   exports: [CoursesContainerComponent, CourseEditorComponent, CoursesContentComponent],
