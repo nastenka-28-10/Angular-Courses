@@ -18,7 +18,7 @@
       <input id="title" type="text"
              class="element-input title-input"
              placeholder="Text input"
-             formControlName="title">
+             formControlName="title" [ngClass]="{'invalid-field': coursesEditor.controls.title.errors}" >
     </div>
 
     <div class="course-editor__form-element">
@@ -38,7 +38,8 @@
       <textarea type="text"
                 class="element-input description-input"
                 placeholder="Add description"
-                formControlName="description"></textarea>
+                formControlName="description"
+                [ngClass]="{'invalid-field': coursesEditor.controls.description.errors}"></textarea>
     </div>
 
     <app-duration-input [formControlName]="'duration'" [validationErrors]="coursesEditor.controls.duration.errors"></app-duration-input>
@@ -58,7 +59,7 @@
       <input type="text"
              class="element-input authors-element__input"
              placeholder="Start typing"
-             formControlName="authors">
+             formControlName="authors" [ngClass]="{'invalid-field': coursesEditor.controls.authors.errors}">
     </div>
 
     <div class="course-editor__action-buttons">

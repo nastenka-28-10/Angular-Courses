@@ -6,4 +6,8 @@
   &__input {
     height: 36px;
   }
+
+  .invalid-field {
+    border: 1px solid red;
+  }
 }
