@@ -1,37 +1,50 @@
-<div class="login-form">
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
   <div class="login-form-header">
     Login
+  </div>
+  <div class="login-form__failed-auth-msg" *ngIf="failedAuthorizationMessage">
+    {{ failedAuthorizationMessage }}
   </div>
   <div class="login-form-input-header">
     <div class="login-form-input-header-left">
       Email
     </div>
-    <div class="login-form-input-header-right">
+    <div class="login-form-input-header-right" *ngIf="loginForm.controls.email.errors &&
+         loginForm.controls.email.errors.required">
       *required
     </div>
   </div>
   <div class="login-form-input-container">
-    <input [(ngModel)]="mail" type="text" class="login-form-input" placeholder="Enter e-mail">
+    <input formControlName="email" type="text" class="login-form-input" placeholder="Enter e-mail">
   </div>
 
   <div class="login-form-input-header">
     <div class="login-form-input-header-left">
       Password
     </div>
-    <div class="login-form-input-header-right">
+    <div class="login-form-input-header-right" *ngIf="loginForm.controls.password.errors &&
+         loginForm.controls.password.errors.required">
       *required
+    </div>
+    <div class="login-form-input-header-right" *ngIf="loginForm.controls.password.errors &&
+         loginForm.controls.password.errors.maxlength">
+      *password must be not more than 20 symbols
+    </div>
+    <div class="login-form-input-header-right" *ngIf="loginForm.controls.password.errors &&
+         loginForm.controls.password.errors.minlength">
+      *password must be not less than 8 symbols
     </div>
   </div>
   <div class="login-form-input-container">
-    <input [(ngModel)]="password" type="password" class="login-form-input" placeholder="Enter password">
+    <input formControlName="password" type="password" class="login-form-input" placeholder="Enter password">
   </div>
 
   <div class="login-form-footer">
     <button class="login-form-footer-link">
       Forgot password?
     </button>
-    <button class="login-form-footer-btn" (click)="onLogin()" [disabled]="!areDataValid">
+    <button type="submit" class="login-form-footer-btn" [disabled]="!loginForm.valid">
       Login
     </button>
   </div>
-</div>
+</form>
