@@ -42,11 +42,12 @@
                 [ngClass]="{'invalid-field': coursesEditor.controls.description.errors}"></textarea>
     </div>
 
-    <app-duration-input [formControlName]="'duration'" [validationErrors]="coursesEditor.controls.duration.errors"></app-duration-input>
+    <app-duration-input [formControlName]="'duration'" [courseDuration]="coursesEditor.controls.duration.value" [validationErrors]="coursesEditor.controls.duration.errors"></app-duration-input>
 
-    <app-date-input [formControlName]="'date'" [validationErrors]="coursesEditor.controls.date.errors"></app-date-input>
+    <app-date-input [formControlName]="'date'" [courseDate]="coursesEditor.controls.date.value" [validationErrors]="coursesEditor.controls.date.errors"></app-date-input>
 
-    <app-authors-input [formControlName]="'authors'" [validationErrors]="coursesEditor.controls.authors.errors"></app-authors-input>
+    <app-authors-input (changedAuthors)="onChangeAuthors($event)" [formControlName]="'authors'"
+                       [validationErrors]="coursesEditor.controls.authors.errors" [existingAuthors]="existingAuthors"></app-authors-input>
 
     <div class="course-editor__action-buttons">
       <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>

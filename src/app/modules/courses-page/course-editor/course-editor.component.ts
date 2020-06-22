@@ -6,6 +6,8 @@ import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
 import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-course-editor',
@@ -15,6 +17,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CourseEditorComponent implements OnInit {
   public routeParams: any = {};
   public coursesEditor: any = {};
+  public chosenAuthors: CourseAuthor[] = [];
+  public existingAuthors: CourseAuthor[] = [];
+
   public courseItem: CourseItemInterface | null = null;
   public editorData: EditorDataInterface = {
     editorTitle: '',
@@ -22,7 +27,7 @@ export class CourseEditorComponent implements OnInit {
     courseDescription: '',
     courseDuration: '',
     courseDate: '',
-    courseAuthors: '',
+    courseAuthors: [],
   };
 
   constructor(
@@ -36,7 +41,7 @@ export class CourseEditorComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
       duration: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
-      authors: new FormControl('', Validators.required),
+      authors: new FormControl(''),
     });
   }
 
@@ -53,10 +58,8 @@ export class CourseEditorComponent implements OnInit {
               courseTitle: `${this.courseItem.name}`,
               courseDescription: `${this.courseItem.description}`,
               courseDuration: `${this.courseItem.length}`,
-              courseDate: `${this.courseItem.date}`,
-              courseAuthors: this.courseItem.authors
-                .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
-                .join(', '),
+              courseDate: moment(this.courseItem.date).format('DD/MM/YYYY'),
+              courseAuthors: this.courseItem.authors,
             };
 
             this.coursesEditor.controls.title.setValue(this.editorData.courseTitle);
@@ -64,6 +67,12 @@ export class CourseEditorComponent implements OnInit {
             this.coursesEditor.controls.duration.setValue(this.editorData.courseDuration);
             this.coursesEditor.controls.date.setValue(this.editorData.courseDate);
             this.coursesEditor.controls.authors.setValue(this.editorData.courseAuthors);
+            this.existingAuthors = this.courseItem.authors.map((author) => ({
+              id: author.id,
+              name: author.name,
+              lastName: author.lastName,
+              fullName: `${author.name} ${author.lastName}`,
+            }));
           },
           (error: HttpErrorResponse) => console.log(error),
         );
@@ -76,15 +85,18 @@ export class CourseEditorComponent implements OnInit {
   async onSaveCourse() {
     if (!this.courseItem) {
       const newCourseId = +('' + Math.random()).slice(2);
-      const courseAuthors = this.generateCourseAuthorsArray(this.coursesEditor.value.authors);
 
       const newCourse: CourseItemInterface = {
         id: newCourseId,
         name: this.coursesEditor.value.title,
-        date: this.coursesEditor.value.date,
+        date: moment(this.coursesEditor.value.date, 'DD/MM/YYYY').format(),
         length: +this.coursesEditor.value.duration,
         description: this.coursesEditor.value.description,
-        authors: courseAuthors,
+        authors: this.chosenAuthors.map((author) => ({
+          id: author.id,
+          name: author.name,
+          lastName: author.lastName,
+        })),
         isTopRated: false,
       };
 
@@ -93,20 +105,16 @@ export class CourseEditorComponent implements OnInit {
         this.router.navigate(['courses']);
       });
     } else {
-      const areCourseAuthorsNotChanged =
-        this.getCourseAuthorsStringView(this.courseItem.authors) ===
-        this.coursesEditor.value.authors;
+      const areCourseAuthorsNotChanged = _.isEqual(this.courseItem.authors, this.chosenAuthors);
 
       const updatedCourse: CourseItemInterface = {
         id: this.courseItem.id,
         name: this.coursesEditor.value.title,
-        date: this.coursesEditor.value.date,
+        date: moment(this.coursesEditor.value.date, 'DD/MM/YYYY').format(),
         length: +this.coursesEditor.value.duration,
         description: this.coursesEditor.value.description,
         isTopRated: this.courseItem.isTopRated,
-        authors: areCourseAuthorsNotChanged
-          ? this.courseItem.authors
-          : this.generateCourseAuthorsArray(this.coursesEditor.value.authors),
+        authors: areCourseAuthorsNotChanged ? this.courseItem.authors : this.chosenAuthors,
       };
 
       this.coursesDataService.updateCourse(updatedCourse).subscribe(() => {
@@ -116,31 +124,7 @@ export class CourseEditorComponent implements OnInit {
     }
   }
 
-  private getCourseAuthorsStringView(authors: CourseAuthor[]): string {
-    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`).join(', ');
-  }
-
-  private generateCourseAuthorsArray(authorsStringView: string): CourseAuthor[] {
-    if (authorsStringView.includes(',')) {
-      return authorsStringView
-        .split(',')
-        .map((author: string) => author.replace(/^\s*(.*)\s*$/, '$1'))
-        .map((author: string) => {
-          const [name, lastName] = author.split(' ');
-          return {
-            id: +('' + Math.random()).slice(2),
-            name,
-            lastName,
-          };
-        });
-    }
-    const [name, lastName] = authorsStringView.split(' ');
-    return [
-      {
-        id: +`${Math.random()}`.slice(2),
-        name,
-        lastName,
-      },
-    ];
+  onChangeAuthors(authors: CourseAuthor[]) {
+    this.chosenAuthors = authors;
   }
 }

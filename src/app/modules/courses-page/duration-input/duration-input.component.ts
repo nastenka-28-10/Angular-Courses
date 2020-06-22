@@ -15,6 +15,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class DurationInputComponent implements ControlValueAccessor {
   @Input() validationErrors: any;
+  @Input() courseDuration = '';
+  val = '';
 
   constructor() {}
 
@@ -23,8 +25,6 @@ export class DurationInputComponent implements ControlValueAccessor {
     this.onChange(val);
     this.onTouch(val);
   }
-
-  val = '';
 
   onChange: any = () => {};
   onTouch: any = () => {};

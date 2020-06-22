@@ -13,6 +13,7 @@
   <input type="text"
          class="element-input duration-element__input"
          placeholder="minutes"
+         [value]="courseDuration"
          [(ngModel)]="value" appValidateDuration #duration=ngModel
          [ngClass]="{'invalid-field': validationErrors || duration.dirty && duration.errors?.invalidDuration}">
 </div>
