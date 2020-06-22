@@ -1,0 +1,31 @@
+<div class="course-editor__form-element authors-element">
+  <div class="element-caption">
+    <div class="element-caption__title">
+      Authors:
+    </div>
+    <div class="element-caption__error-notifier" *ngIf="validationErrors &&
+         validationErrors.required">
+      required
+    </div>
+  </div>
+
+  <div class="input-group__chosen-authors" *ngIf="chosenAuthors.length">
+    <span *ngFor="let author of chosenAuthors" class="input-group__chosen-author">{{author.fullName}}
+      <span
+        class="input-group__delete-author"
+        (click)="onAuthorDelete(author)">
+        &#215;
+      </span>
+    </span>
+  </div>
+  <div class="input-group">
+    <input type="text"
+           class="element-input authors-element__input"
+           placeholder="Start typing"
+           (keyup)="inputChange.next($event.target)" [(ngModel)]="value"
+           [ngClass]="{'invalid-field': validationErrors}">
+    <div class="input-group__fetched-authors" *ngIf="fetchedAuthors.length && isDropdownOpened">
+      <span *ngFor="let author of fetchedAuthors" class="input-group__author" (click)="onAuthorClick(author)">{{author.name}}</span>
+    </div>
+  </div>
+</div>

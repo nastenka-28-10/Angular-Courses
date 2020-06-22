@@ -46,21 +46,7 @@
 
     <app-date-input [formControlName]="'date'" [validationErrors]="coursesEditor.controls.date.errors"></app-date-input>
 
-    <div class="course-editor__form-element authors-element">
-      <div class="element-caption">
-        <div class="element-caption__title">
-          Authors:
-        </div>
-        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.authors.errors &&
-         coursesEditor.controls.authors.errors.required">
-          required
-        </div>
-      </div>
-      <input type="text"
-             class="element-input authors-element__input"
-             placeholder="Start typing"
-             formControlName="authors" [ngClass]="{'invalid-field': coursesEditor.controls.authors.errors}">
-    </div>
+    <app-authors-input [formControlName]="'authors'" [validationErrors]="coursesEditor.controls.authors.errors"></app-authors-input>
 
     <div class="course-editor__action-buttons">
       <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>

@@ -17,6 +17,7 @@ import { DateInputComponent } from 'app/modules/courses-page/date-input/date-inp
 import { ValidateDateDirective } from 'app/modules/courses-page/validate-date/validate-date.directive';
 import { DurationInputComponent } from 'app/modules/courses-page/duration-input/duration-input.component';
 import { ValidateDurationDirective } from 'app/modules/courses-page/validate-duration/validate-duration.directive';
+import { AuthorsInputComponent } from 'app/modules/courses-page/authors-input/authors-input.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ValidateDurationDirective } from 'app/modules/courses-page/validate-dur
     ValidateDateDirective,
     DurationInputComponent,
     ValidateDurationDirective,
+    AuthorsInputComponent,
   ],
   imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule, ReactiveFormsModule],
   exports: [CoursesContainerComponent, CourseEditorComponent, CoursesContentComponent],
