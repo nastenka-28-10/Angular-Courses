@@ -6,13 +6,18 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesContainerComponent } from './courses-container/courses-container.component';
 import { CourseBorderDirective } from './course-border/course-border.directive';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'app/modules/core/core.module';
 import { OrderByPipe } from 'app/pipes/order-by-pipe/order-by.pipe';
 import { FilterByCourseNamePipe } from 'app/pipes/filter-by-course-name-pipe/filter-by-course-name.pipe';
 import { CourseEditorComponent } from 'app/modules/courses-page/course-editor/course-editor.component';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { CoursesContentComponent } from 'app/modules/courses-page/courses-content/courses-content.component';
+import { DateInputComponent } from 'app/modules/courses-page/date-input/date-input.component';
+import { ValidateDateDirective } from 'app/modules/courses-page/validate-date/validate-date.directive';
+import { DurationInputComponent } from 'app/modules/courses-page/duration-input/duration-input.component';
+import { ValidateDurationDirective } from 'app/modules/courses-page/validate-duration/validate-duration.directive';
+import { AuthorsInputComponent } from 'app/modules/courses-page/authors-input/authors-input.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +32,13 @@ import { CoursesContentComponent } from 'app/modules/courses-page/courses-conten
     CourseEditorComponent,
     CoursesContentComponent,
     CoursesContentComponent,
+    DateInputComponent,
+    ValidateDateDirective,
+    DurationInputComponent,
+    ValidateDurationDirective,
+    AuthorsInputComponent,
   ],
-  imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule],
+  imports: [CommonModule, FormsModule, CoreModule, AppRoutingModule, ReactiveFormsModule],
   exports: [CoursesContainerComponent, CourseEditorComponent, CoursesContentComponent],
 })
 export class CoursesPageModule {}

@@ -1,82 +1,57 @@
 <div class="course-editor">
-  <h2 class="course-editor__title">{{editorData.editorTitle}}</h2>
-  <div class="course-editor__form-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Title:
+  <form [formGroup]="coursesEditor" (ngSubmit)="onSaveCourse()">
+    <h2 class="course-editor__title">{{editorData.editorTitle}}</h2>
+    <div class="course-editor__form-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Title:
+        </div>
+        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.title.errors &&
+         coursesEditor.controls.title.errors.required">
+          required
+        </div>
+        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.title.errors &&
+         coursesEditor.controls.title.errors.maxlength">
+          title must be not more than 50 symbols
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <input id="title" type="text"
+             class="element-input title-input"
+             placeholder="Text input"
+             formControlName="title" [ngClass]="{'invalid-field': coursesEditor.controls.title.errors}" >
     </div>
-    <input type="text"
-           class="element-input title-input"
-           placeholder="Text input"
-           [(ngModel)]="editorData.courseTitle">
-  </div>
 
-  <div class="course-editor__form-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Description:
+    <div class="course-editor__form-element">
+      <div class="element-caption">
+        <div class="element-caption__title">
+          Description:
+        </div>
+        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.description.errors &&
+         coursesEditor.controls.description.errors.required">
+          required
+        </div>
+        <div class="element-caption__error-notifier" *ngIf="coursesEditor.controls.description.errors &&
+         coursesEditor.controls.description.errors.maxlength">
+          description must be not more than 500 symbols
+        </div>
       </div>
-      <div class="element-caption__required">
-        required
-      </div>
+      <textarea type="text"
+                class="element-input description-input"
+                placeholder="Add description"
+                formControlName="description"
+                [ngClass]="{'invalid-field': coursesEditor.controls.description.errors}"></textarea>
     </div>
-    <textarea type="text"
-              class="element-input description-input"
-              placeholder="Add description"
-              [(ngModel)]="editorData.courseDescription"></textarea>
-  </div>
 
-  <div class="course-editor__form-element duration-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Duration:
-      </div>
-      <div class="element-caption__required">
-        required
-      </div>
+    <app-duration-input [formControlName]="'duration'" [courseDuration]="coursesEditor.controls.duration.value" [validationErrors]="coursesEditor.controls.duration.errors"></app-duration-input>
+
+    <app-date-input [formControlName]="'date'" [courseDate]="coursesEditor.controls.date.value" [validationErrors]="coursesEditor.controls.date.errors"></app-date-input>
+
+    <app-authors-input (changedAuthors)="onChangeAuthors($event)" [formControlName]="'authors'"
+                       [validationErrors]="coursesEditor.controls.authors.errors" [existingAuthors]="existingAuthors"></app-authors-input>
+
+    <div class="course-editor__action-buttons">
+      <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>
+      <button [disabled]="!coursesEditor.valid" type="submit" class="save-course">Save</button>
     </div>
-    <input type="text"
-           class="element-input duration-element__input"
-           placeholder="minutes"
-           [(ngModel)]="editorData.courseDuration">
-  </div>
-
-  <div class="course-editor__form-element date-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Date:
-      </div>
-      <div class="element-caption__required">
-        required
-      </div>
-    </div>
-    <input type="text"
-           class="element-input date-element__input"
-           placeholder="mm-dd-yyyy"
-           [(ngModel)]="editorData.courseDate">
-  </div>
-
-  <div class="course-editor__form-element authors-element">
-    <div class="element-caption">
-      <div class="element-caption__title">
-        Authors:
-      </div>
-      <div class="element-caption__required">
-        required
-      </div>
-    </div>
-    <input type="text"
-           class="element-input authors-element__input"
-           placeholder="Start typing"
-           [(ngModel)]="editorData.courseAuthors">
-  </div>
-
-  <div class="course-editor__action-buttons">
-    <button class="cancel-course" [routerLink]="['/courses']">Cancel</button>
-    <button class="save-course" (click)="onSaveCourse()">Save</button>
-  </div>
+  </form>
 </div>

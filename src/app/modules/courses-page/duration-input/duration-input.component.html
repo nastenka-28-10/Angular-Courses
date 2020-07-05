@@ -1,0 +1,19 @@
+<div class="course-editor__form-element duration-element">
+  <div class="element-caption">
+    <div class="element-caption__title">
+      Duration:
+    </div>
+    <div class="element-caption__error-notifier" *ngIf="validationErrors && validationErrors.required">
+      required
+    </div>
+    <div *ngIf="duration.dirty && duration.errors?.invalidDuration" class="element-caption__error-notifier">
+      {{ duration.errors.invalidDuration }}
+    </div>
+  </div>
+  <input type="text"
+         class="element-input duration-element__input"
+         placeholder="minutes"
+         [value]="courseDuration"
+         [(ngModel)]="value" appValidateDuration #duration=ngModel
+         [ngClass]="{'invalid-field': validationErrors || duration.dirty && duration.errors?.invalidDuration}">
+</div>

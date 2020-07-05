@@ -5,6 +5,9 @@ import { CoursesDataService } from 'app/modules/courses-page/courses-data-servic
 import { EditorDataInterface } from 'app/interfaces/editor-data-interface';
 import { LoadingSpinnerServiceService } from 'app/modules/core/loading-spinner-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-course-editor',
@@ -13,6 +16,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CourseEditorComponent implements OnInit {
   public routeParams: any = {};
+  public coursesEditor: any = {};
+  public chosenAuthors: CourseAuthor[] = [];
+  public existingAuthors: CourseAuthor[] = [];
+
   public courseItem: CourseItemInterface | null = null;
   public editorData: EditorDataInterface = {
     editorTitle: '',
@@ -20,7 +27,7 @@ export class CourseEditorComponent implements OnInit {
     courseDescription: '',
     courseDuration: '',
     courseDate: '',
-    courseAuthors: '',
+    courseAuthors: [],
   };
 
   constructor(
@@ -28,7 +35,15 @@ export class CourseEditorComponent implements OnInit {
     private route: ActivatedRoute,
     private coursesDataService: CoursesDataService,
     private loadingSpinnerService: LoadingSpinnerServiceService,
-  ) {}
+  ) {
+    this.coursesEditor = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      duration: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+      authors: new FormControl(''),
+    });
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((data) => {
@@ -43,11 +58,21 @@ export class CourseEditorComponent implements OnInit {
               courseTitle: `${this.courseItem.name}`,
               courseDescription: `${this.courseItem.description}`,
               courseDuration: `${this.courseItem.length}`,
-              courseDate: `${this.courseItem.date}`,
-              courseAuthors: this.courseItem.authors
-                .map((item: CourseAuthor) => `${item.name} ${item.lastName}`)
-                .join(', '),
+              courseDate: moment(this.courseItem.date).format('DD/MM/YYYY'),
+              courseAuthors: this.courseItem.authors,
             };
+
+            this.coursesEditor.controls.title.setValue(this.editorData.courseTitle);
+            this.coursesEditor.controls.description.setValue(this.editorData.courseDescription);
+            this.coursesEditor.controls.duration.setValue(this.editorData.courseDuration);
+            this.coursesEditor.controls.date.setValue(this.editorData.courseDate);
+            this.coursesEditor.controls.authors.setValue(this.editorData.courseAuthors);
+            this.existingAuthors = this.courseItem.authors.map((author) => ({
+              id: author.id,
+              name: author.name,
+              lastName: author.lastName,
+              fullName: `${author.name} ${author.lastName}`,
+            }));
           },
           (error: HttpErrorResponse) => console.log(error),
         );
@@ -60,15 +85,18 @@ export class CourseEditorComponent implements OnInit {
   async onSaveCourse() {
     if (!this.courseItem) {
       const newCourseId = +('' + Math.random()).slice(2);
-      const courseAuthors = this.generateCourseAuthorsArray(this.editorData.courseAuthors);
 
       const newCourse: CourseItemInterface = {
         id: newCourseId,
-        name: this.editorData.courseTitle,
-        date: this.editorData.courseDate,
-        length: +this.editorData.courseDuration,
-        description: this.editorData.courseDescription,
-        authors: courseAuthors,
+        name: this.coursesEditor.value.title,
+        date: moment(this.coursesEditor.value.date, 'DD/MM/YYYY').format(),
+        length: +this.coursesEditor.value.duration,
+        description: this.coursesEditor.value.description,
+        authors: this.chosenAuthors.map((author) => ({
+          id: author.id,
+          name: author.name,
+          lastName: author.lastName,
+        })),
         isTopRated: false,
       };
 
@@ -77,19 +105,16 @@ export class CourseEditorComponent implements OnInit {
         this.router.navigate(['courses']);
       });
     } else {
-      const areCourseAuthorsNotChanged =
-        this.getCourseAuthorsStringView(this.courseItem.authors) === this.editorData.courseAuthors;
+      const areCourseAuthorsNotChanged = _.isEqual(this.courseItem.authors, this.chosenAuthors);
 
       const updatedCourse: CourseItemInterface = {
         id: this.courseItem.id,
-        name: this.editorData.courseTitle,
-        date: this.editorData.courseDate,
-        length: +this.editorData.courseDuration,
-        description: this.editorData.courseDescription,
+        name: this.coursesEditor.value.title,
+        date: moment(this.coursesEditor.value.date, 'DD/MM/YYYY').format(),
+        length: +this.coursesEditor.value.duration,
+        description: this.coursesEditor.value.description,
         isTopRated: this.courseItem.isTopRated,
-        authors: areCourseAuthorsNotChanged
-          ? this.courseItem.authors
-          : this.generateCourseAuthorsArray(this.editorData.courseAuthors),
+        authors: areCourseAuthorsNotChanged ? this.courseItem.authors : this.chosenAuthors,
       };
 
       this.coursesDataService.updateCourse(updatedCourse).subscribe(() => {
@@ -99,31 +124,7 @@ export class CourseEditorComponent implements OnInit {
     }
   }
 
-  private getCourseAuthorsStringView(authors: CourseAuthor[]): string {
-    return authors.map((item: CourseAuthor) => `${item.name} ${item.lastName}`).join(', ');
-  }
-
-  private generateCourseAuthorsArray(authorsStringView: string): CourseAuthor[] {
-    if (authorsStringView.includes(',')) {
-      return authorsStringView
-        .split(',')
-        .map((author: string) => author.replace(/^\s*(.*)\s*$/, '$1'))
-        .map((author: string) => {
-          const [name, lastName] = author.split(' ');
-          return {
-            id: +('' + Math.random()).slice(2),
-            name,
-            lastName,
-          };
-        });
-    }
-    const [name, lastName] = authorsStringView.split(' ');
-    return [
-      {
-        id: +('' + Math.random()).slice(2),
-        name,
-        lastName,
-      },
-    ];
+  onChangeAuthors(authors: CourseAuthor[]) {
+    this.chosenAuthors = authors;
   }
 }

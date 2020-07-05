@@ -48,4 +48,8 @@ export class CoursesDataService {
     this.loadingSpinnerService.display(true);
     return this.http.delete(`${this.BASE_URL}/courses/${id}`);
   }
+
+  getAuthors(textFragment: string): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/authors?textFragment=${textFragment}`);
+  }
 }

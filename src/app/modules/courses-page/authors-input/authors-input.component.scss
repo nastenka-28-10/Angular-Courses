@@ -1,0 +1,70 @@
+@import 'app/modules/courses-page/course-editor/course-editor';
+
+.authors-element {
+  font-family: Source Sans Pro, sans-serif;
+
+  .element-caption {
+    width: 200px;
+  }
+
+  &__input {
+    height: 36px;
+  }
+
+  .invalid-field {
+    border: 1px solid red;
+  }
+
+  .input-group {
+    position: relative;
+    width: 200px;
+
+    &__fetched-authors {
+      position: absolute;
+      top: 36px;
+      max-height: 150px;
+      border: 1px solid $light-silver;
+      border-radius: 3px;
+      background-color: $white;
+      overflow: auto;
+    }
+
+    &__author {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border: 1px solid $light-silver;
+      font-size: 16px;
+      color: $dark;
+
+      &:hover {
+        background-color: $light-silver;
+        cursor: pointer;
+      }
+    }
+
+    &__chosen-author {
+      display: flex;
+      align-items: center;
+      height: 20px;
+      padding: 4px;
+      margin: 0 3px 3px 0;
+      border: 1px solid $light-silver;
+      border-radius: 4px;
+      font-size: 14px;
+      color: $dark;
+    }
+
+    &__chosen-authors {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    &__delete-author {
+      margin-left: 4px;
+      cursor: pointer;
+    }
+  }
+}

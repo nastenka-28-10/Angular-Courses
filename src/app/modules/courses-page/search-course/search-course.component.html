@@ -1,6 +1,9 @@
-<div class="search-container">
+<form [formGroup]="searchField" class="search-container">
   <div class="search-container__wrapper">
     <div class="search-container__icon"></div>
-    <input (keyup)="inputChange.next($event.target)" type="text" class="search-container__input" placeholder="Text to search">
+    <input (keyup)="inputChange.next($event.target)"
+           type="text" class="search-container__input"
+           placeholder="Text to search"
+           formControlName="search">
   </div>
-</div>
+</form>

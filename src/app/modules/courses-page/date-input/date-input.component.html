@@ -1,0 +1,20 @@
+<div class="course-editor__form-element date-element">
+  <div class="element-caption">
+    <div class="element-caption__title">
+      Date:
+    </div>
+    <div class="element-caption__error-notifier" *ngIf="validationErrors && validationErrors.required">
+      required
+    </div>
+    <div *ngIf="date.dirty && date.errors?.invalidDate" class="element-caption__error-notifier">
+      {{ date.errors.invalidDate }}
+    </div>
+  </div>
+
+  <input type="text"
+         class="element-input date-element__input"
+         placeholder="dd/MM/yyyy" [(ngModel)]="value" [value]="courseDate" appValidateDate #date=ngModel
+         [ngClass]="{'invalid-field': validationErrors || date.dirty && date.errors?.invalidDate}"
+  >
+
+</div>

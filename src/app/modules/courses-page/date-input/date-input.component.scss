@@ -1,0 +1,13 @@
+@import 'app/modules/courses-page/course-editor/course-editor';
+
+.date-element {
+  width: 200px;
+
+  &__input {
+    height: 36px;
+  }
+
+  .invalid-field {
+    border: 1px solid red;
+  }
+}

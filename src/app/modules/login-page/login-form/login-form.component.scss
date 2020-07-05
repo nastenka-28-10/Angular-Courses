@@ -110,4 +110,12 @@
       cursor: not-allowed;
     }
   }
+
+  &__failed-auth-msg {
+    position: absolute;
+    top: 31px;
+    right: 24px;
+    font-family: Source Sans Pro, sans-serif;
+    color: red;
+  }
 }

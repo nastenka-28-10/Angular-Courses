@@ -23,10 +23,6 @@
     display: flex;
     flex-direction: column;
 
-    &:last-child {
-      margin-bottom: 24px;
-    }
-
     .element-caption {
       display: flex;
       align-items: center;
@@ -41,14 +37,14 @@
         color: $slate-grey;
       }
 
-      &__required {
+      &__error-notifier {
         position: relative;
         font-family: Source Sans Pro;
         font-size: 12px;
         line-height: 1.5;
         letter-spacing: 0.19px;
         text-align: right;
-        color: $battleship-grey;
+        color: $red;
 
         &::before {
           position: absolute;
@@ -84,15 +80,6 @@
     }
   }
 
-  .duration-element,
-  .date-element {
-    width: 150px;
-
-    &__input {
-      height: 36px;
-    }
-  }
-
   .authors-element {
     width: 312px;
 
@@ -104,6 +91,7 @@
   &__action-buttons {
     display: flex;
     margin-left: auto;
+    margin-top: 24px;
 
     .cancel-course,
     .save-course {
@@ -116,6 +104,15 @@
       line-height: 2.43;
       letter-spacing: -0.1px;
       cursor: pointer;
+
+      &:disabled {
+        background-color: $pale-grey;
+        color: $cool-grey;
+        cursor: not-allowed;
+      }
+      &:disabled:hover {
+        background-color: $pale-grey;
+      }
     }
 
     .cancel-course {
@@ -136,5 +133,9 @@
         background-color: $dark-green;
       }
     }
+  }
+
+  .invalid-field {
+    border: 1px solid red;
   }
 }
